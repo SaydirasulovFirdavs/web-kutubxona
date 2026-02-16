@@ -12,13 +12,15 @@ dotenv.config();
 
 const { Client } = pg;
 
-const config = {
-    user: process.env.DB_USER || 'postgres',
-    password: process.env.DB_PASSWORD,
-    host: process.env.DB_HOST || 'localhost',
-    port: process.env.DB_PORT || 5432,
-    database: process.env.DB_NAME || 'web_kutubxona',
-};
+const config = process.env.DATABASE_URL
+    ? { connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } }
+    : {
+        user: process.env.DB_USER || 'postgres',
+        password: process.env.DB_PASSWORD,
+        host: process.env.DB_HOST || 'localhost',
+        port: process.env.DB_PORT || 5432,
+        database: process.env.DB_NAME || 'web_kutubxona',
+    };
 
 async function seedAdmin() {
     const client = new Client(config);
