@@ -33,9 +33,13 @@ export const generateAccessToken = (userId, role) => {
  * Generate JWT refresh token
  */
 export const generateRefreshToken = (userId) => {
+    const secret = process.env.JWT_REFRESH_SECRET || process.env.JWT_SECRET;
+    if (!secret) {
+        console.warn('⚠️ WARNING: No JWT_SECRET or JWT_REFRESH_SECRET provided!');
+    }
     return jwt.sign(
         { userId },
-        process.env.JWT_REFRESH_SECRET,
+        secret,
         { expiresIn: process.env.JWT_REFRESH_EXPIRE || '7d' }
     );
 };
