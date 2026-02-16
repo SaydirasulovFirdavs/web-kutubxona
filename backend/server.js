@@ -28,6 +28,12 @@ const PORT = process.env.PORT || 5000;
 // MIDDLEWARE
 // ============================================
 
+// Simple request logger
+app.use((req, res, next) => {
+    console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+    next();
+});
+
 // Security headers - Customize for PDF loading
 app.use(helmet({
     crossOriginResourcePolicy: { policy: "cross-origin" },
