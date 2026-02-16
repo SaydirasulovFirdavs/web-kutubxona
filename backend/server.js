@@ -11,6 +11,17 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Ensure upload directories exist
+const uploadDir = path.join(__dirname, 'uploads');
+const booksDir = path.join(uploadDir, 'books');
+
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+}
+if (!fs.existsSync(booksDir)) {
+    fs.mkdirSync(booksDir, { recursive: true });
+}
+
 // Import routes
 import authRoutes from './routes/auth.routes.js';
 import booksRoutes from './routes/books.routes.js';
