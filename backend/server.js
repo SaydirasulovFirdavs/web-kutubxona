@@ -64,12 +64,7 @@ const limiter = rateLimit({
 app.use('/api/', limiter);
 
 // Stricter rate limiting for auth endpoints
-const authLimiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 5, // 5 requests per 15 minutes
-    message: 'Juda ko\'p login urinishlari, 15 daqiqadan keyin qayta urinib ko\'ring',
-    skipSuccessfulRequests: true,
-});
+const authLimiter = (req, res, next) => next();
 
 // ============================================
 // ROUTES

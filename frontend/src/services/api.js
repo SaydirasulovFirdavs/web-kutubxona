@@ -1,4 +1,3 @@
-```javascript
 import axios from 'axios';
 
 const API_URL = '/api';
@@ -16,7 +15,7 @@ api.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem('accessToken');
         if (token) {
-            config.headers.Authorization = `Bearer ${ token } `;
+            config.headers.Authorization = `Bearer ${token}`;
         }
         return config;
     },
@@ -37,7 +36,7 @@ api.interceptors.response.use(
 
             try {
                 const refreshToken = localStorage.getItem('refreshToken');
-                const response = await axios.post(`${ API_URL } /auth/refresh`, {
+                const response = await axios.post(`${API_URL}/auth/refresh`, {
                     refreshToken,
                 });
 
@@ -45,7 +44,7 @@ api.interceptors.response.use(
                 localStorage.setItem('accessToken', accessToken);
 
                 // Retry original request with new token
-                originalRequest.headers.Authorization = `Bearer ${ accessToken } `;
+                originalRequest.headers.Authorization = `Bearer ${accessToken}`;
                 return api(originalRequest);
             } catch (refreshError) {
                 // Refresh failed, logout user
@@ -78,22 +77,22 @@ export const authAPI = {
 // ============================================
 export const booksAPI = {
     getAll: (params) => api.get('/books', { params }),
-    getById: (id) => api.get(`/ books / ${ id } `),
+    getById: (id) => api.get(`/books/${id}`),
     search: (query, filters) => api.get('/books/search', { params: { query, ...filters } }),
-    download: (id) => api.post(`/ books / ${ id }/download`, {}, { responseType: 'blob' }),
-addReview: (id, data) => api.post(`/books/${id}/review`, data),
+    download: (id) => api.post(`/books/${id}/download`, {}, { responseType: 'blob' }),
+    addReview: (id, data) => api.post(`/books/${id}/review`, data),
     getReviews: (id) => api.get(`/books/${id}/reviews`),
-        getCategories: () => api.get('/books/categories'),
-            getTrending: (limit = 5) => api.get('/books/trending', { params: { limit } }),
-                getNew: (limit = 5) => api.get('/books/new', { params: { limit } }),
-                    // Bookmarks & Highlights
-                    getBookmarks: (id) => api.get(`/books/${id}/bookmarks`),
-                        addBookmark: (id, data) => api.post(`/books/${id}/bookmarks`, data),
-                            deleteBookmark: (bookmarkId) => api.delete(`/books/bookmarks/${bookmarkId}`),
-                                getHighlights: (id) => api.get(`/books/${id}/highlights`),
-                                    addHighlight: (id, data) => api.post(`/books/${id}/highlights`, data),
-                                        deleteHighlight: (highlightId) => api.delete(`/books/highlights/${highlightId}`),
-                                            getPersonalizedRecommendations: (params) => api.get('/books/recommendations/personalized', { params }),
+    getCategories: () => api.get('/books/categories'),
+    getTrending: (limit = 5) => api.get('/books/trending', { params: { limit } }),
+    getNew: (limit = 5) => api.get('/books/new', { params: { limit } }),
+    // Bookmarks & Highlights
+    getBookmarks: (id) => api.get(`/books/${id}/bookmarks`),
+    addBookmark: (id, data) => api.post(`/books/${id}/bookmarks`, data),
+    deleteBookmark: (bookmarkId) => api.delete(`/books/bookmarks/${bookmarkId}`),
+    getHighlights: (id) => api.get(`/books/${id}/highlights`),
+    addHighlight: (id, data) => api.post(`/books/${id}/highlights`, data),
+    deleteHighlight: (highlightId) => api.delete(`/books/highlights/${highlightId}`),
+    getPersonalizedRecommendations: (params) => api.get('/books/recommendations/personalized', { params }),
 };
 
 // ============================================
