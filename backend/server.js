@@ -75,8 +75,11 @@ app.use(cors({
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// Serve static files (uploads)
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// Serve static files (uploads) with logging
+app.use('/uploads', (req, res, next) => {
+    console.log(`[Static] Serving file: ${req.url}`);
+    next();
+}, express.static(path.join(__dirname, 'uploads')));
 
 // Rate limiting
 const limiter = rateLimit({
@@ -121,8 +124,7 @@ app.use('/api/admin', adminRoutes);
 // Stats routes
 app.use('/api/stats', statsRoutes);
 
-// Serve uploaded files
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// Already served above
 
 // ============================================
 // FRONTEND SERVING (Production)

@@ -1,26 +1,18 @@
 export const getImageUrl = (url) => {
-    if (!url) return "/placeholder-book.svg";
-    if (url.startsWith('http')) return url;
-
-    // Get base API URL
-    let apiBase = import.meta.env.VITE_API_URL;
-
-    if (!apiBase) {
-        if (import.meta.env.PROD) {
-            // In production, use current origin
-            apiBase = window.location.origin;
-        } else {
-            // In development, default to localhost
-            apiBase = 'http://localhost:5000';
-        }
-    } else {
-        // Remove /api if present at the end
-        apiBase = apiBase.replace(/\/api$/, '');
-    }
+    if (!url || url === 'null' || url === 'undefined') return "/placeholder-book.svg";
+    if (url.startsWith('http') || url.startsWith('blob:') || url.startsWith('data:')) return url;
 
     // Normalize path: remove leading slash, replace backslashes
-    const cleanPath = url.startsWith('/') ? url.slice(1) : url;
-    const normalizedPath = cleanPath.replace(/\\/g, '/');
+    let cleanPath = url.replace(/\\/g, '/');
+    if (cleanPath.startsWith('/')) cleanPath = cleanPath.slice(1);
 
-    return `${apiBase}/${normalizedPath}`;
+    // In production (Render), everything is on the same domain
+    // We should use a relative path starting with /
+    if (import.meta.env.PROD) {
+        return `/${cleanPath}`;
+    }
+
+    // In development, we might need the full backend URL
+    const apiBase = (import.meta.env.VITE_API_URL || 'http://localhost:5000').replace(/\/api$/, '');
+    return `${apiBase}/${cleanPath}`;
 };

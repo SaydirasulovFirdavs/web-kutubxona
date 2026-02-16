@@ -66,10 +66,7 @@ function BookUploadForm({ onSuccess, initialData = null, onCancel }) {
                 type: initialData.file_format || 'pdf'
             });
             if (initialData.cover_image) {
-                const imageUrl = initialData.cover_image.startsWith('http')
-                    ? initialData.cover_image
-                    : `${(import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace('/api', '')}/${initialData.cover_image}`;
-                setCoverPreview(imageUrl);
+                setCoverPreview(getImageUrl(initialData.cover_image));
             }
         }
     }, [initialData]);
