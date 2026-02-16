@@ -12,13 +12,15 @@ dotenv.config();
 
 const { Client } = pg;
 
-const config = {
-    user: process.env.DB_USER || 'postgres',
-    password: process.env.DB_PASSWORD,
-    host: process.env.DB_HOST || 'localhost',
-    port: process.env.DB_PORT || 5432,
-    database: 'postgres', // Connect to default db first
-};
+const config = process.env.DATABASE_URL
+    ? { connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } }
+    : {
+        user: process.env.DB_USER || 'postgres',
+        password: process.env.DB_PASSWORD,
+        host: process.env.DB_HOST || 'localhost',
+        port: process.env.DB_PORT || 5432,
+        database: 'postgres',
+    };
 
 async function initDB() {
     console.log('Connecting to PostgreSQL...');
