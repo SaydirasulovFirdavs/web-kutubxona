@@ -170,6 +170,7 @@ export const login = async (req, res) => {
         );
 
         if (result.rows.length === 0) {
+            console.log(`🔍 Login attempt failed: User not found [${email}]`);
             return res.status(401).json({
                 success: false,
                 message: 'Email yoki parol noto\'g\'ri'
@@ -177,9 +178,11 @@ export const login = async (req, res) => {
         }
 
         const user = result.rows[0];
+        console.log(`🔍 Found user: ${user.email}, Status: ${user.status}, Role: ${user.role}`);
 
         // Check if email is verified
         if (!user.email_verified) {
+            console.log(`🔍 Login failed: Email not verified [${email}]`);
             return res.status(403).json({
                 success: false,
                 message: 'Iltimos, avval emailingizni tasdiqlang'
@@ -188,6 +191,7 @@ export const login = async (req, res) => {
 
         // Check if account is active
         if (user.status !== 'active') {
+            console.log(`🔍 Login failed: Account not active [${email}, status: ${user.status}]`);
             return res.status(403).json({
                 success: false,
                 message: 'Hisobingiz bloklangan. Administrator bilan bog\'laning'
@@ -196,6 +200,7 @@ export const login = async (req, res) => {
 
         // Verify password
         const isPasswordValid = await comparePassword(password, user.password_hash);
+        console.log(`🔍 Password validation: ${isPasswordValid ? '✅ SUCCESS' : '❌ FAILED'}`);
 
         if (!isPasswordValid) {
             return res.status(401).json({
