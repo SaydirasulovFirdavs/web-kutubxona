@@ -185,6 +185,25 @@ if (process.env.NODE_ENV !== 'test') {
     ║   📡 Frontend URL: ${process.env.FRONTEND_URL || 'http://localhost:5173'} ║
     ╚═══════════════════════════════════════════╝
         `);
+
+        // Self-ping to stay awake on Render (Free Tier)
+        if (process.env.NODE_ENV === 'production') {
+            const SITE_URL = 'https://web-kutubxona.onrender.com';
+            setInterval(() => {
+                import('node-fetch').then(({ default: fetch }) => {
+                    fetch(`${SITE_URL}/health`)
+                        .then(res => console.log(`[Self-Ping] Awake: ${res.status}`))
+                        .catch(err => console.error(`[Self-Ping] Error: ${err.message}`));
+                }).catch(() => {
+                    // Fallback to native fetch if node-fetch not found (Node 18+)
+                    if (global.fetch) {
+                        global.fetch(`${SITE_URL}/health`)
+                            .then(res => console.log(`[Self-Ping] Awake: ${res.status}`))
+                            .catch(err => console.error(`[Native-Ping] Error: ${err.message}`));
+                    }
+                });
+            }, 14 * 60 * 1000); // 14 minutes
+        }
     });
 }
 
