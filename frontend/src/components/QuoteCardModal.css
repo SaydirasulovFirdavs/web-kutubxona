@@ -1,0 +1,110 @@
+.quote-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.quote-modal-content {
+    background: var(--color-surface);
+    border-radius: 24px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: var(--shadow-2xl);
+    border: 1px solid var(--color-border);
+}
+
+.theme-selector {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 1.5rem 0;
+}
+
+.theme-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.theme-dot.active {
+    border-color: var(--color-primary);
+    transform: scale(1.2);
+}
+
+.quote-card-preview {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border-radius: 20px;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.quote-mark {
+    font-size: 8rem;
+    position: absolute;
+    top: -1rem;
+    left: 1rem;
+    opacity: 0.1;
+    font-family: serif;
+}
+
+.quote-text-main {
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    z-index: 1;
+    font-style: italic;
+    text-align: center;
+}
+
+.quote-footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    z-index: 1;
+}
+
+.quote-book-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.quote-book-title {
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.quote-author-name {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+.quote-watermark {
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    opacity: 0.3;
+}
+
+.btn-block {
+    width: 100%;
+}

@@ -1,0 +1,40 @@
+
+> web-kutubxona-backend@1.0.0 test
+> node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage tests/books.test.js
+
+(node:11500) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS tests/books.test.js (5.452 s)
+  Books API Integration Tests
+    GET /api/books
+      ÔêÜ should return a list of active books (110 ms)
+    GET /api/books/:id
+      ÔêÜ should return book details for a valid ID (21 ms)
+    POST /api/books/library
+      ÔêÜ should add book to library when authenticated (133 ms)
+      ÔêÜ should return 401 when not authenticated (32 ms)
+
+----------------------|---------|----------|---------|---------|-------------------------------------------------------------------------------------------------
+File                  | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s                                                                               
+----------------------|---------|----------|---------|---------|-------------------------------------------------------------------------------------------------
+All files             |   38.43 |    52.63 |   15.15 |   38.43 |                                                                                                 
+ backend              |    78.1 |    16.66 |     100 |    78.1 |                                                                                                 
+  server.js           |    78.1 |    16.66 |     100 |    78.1 | 72-76,97-100,105-111,118-128,132-134                                                            
+ backend/controllers  |   23.39 |    43.75 |   11.11 |   23.39 |                                                                                                 
+  admin.controller.js |    13.5 |      100 |       0 |    13.5 | 9-89,96-193,200-263,270-297,304-338,345-378,385-421,428-447                                     
+  auth.controller.js  |   13.72 |      100 |       0 |   13.72 | 20-95,102-143,150-262,269-324,331-353,360-411,418-470                                           
+  books.controller.js |   49.01 |    30.76 |   42.85 |   49.01 | 32-35,39-45,49-52,56-59,103-108,146-150,164-169,176-244,262-266,282-287,294-324,334-360,364-397 
+  user.controller.js  |   17.77 |      100 |       0 |   17.77 | 8-35,42-102,109-139,146-182,189-216                                                             
+ backend/middleware   |   50.69 |    66.66 |   66.66 |   50.69 |                                                                                                 
+  auth.middleware.js  |   50.69 |    66.66 |   66.66 |   50.69 | 22-26,38-42,47-51,56-61,69-103,111-125                                                          
+ backend/routes       |    96.8 |      100 |       0 |    96.8 |                                                                                                 
+  admin.routes.js     |   91.34 |      100 |       0 |   91.34 | 22,25-27,31-35                                                                                  
+  auth.routes.js      |     100 |      100 |     100 |     100 |                                                                                                 
+  books.routes.js     |     100 |      100 |     100 |     100 |                                                                                                 
+  user.routes.js      |     100 |      100 |     100 |     100 |                                                                                                 
+----------------------|---------|----------|---------|---------|-------------------------------------------------------------------------------------------------
+Test Suites: 1 passed, 1 total
+Tests:       4 passed, 4 total
+Snapshots:   0 total
+Time:        6.546 s, estimated 7 s
+Ran all test suites matching /tests\\books.test.js/i.

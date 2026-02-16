@@ -1,0 +1,100 @@
+
+> web-kutubxona-backend@1.0.0 test
+> node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage tests/books.test.js
+
+(node:7188) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+FAIL tests/books.test.js (6.092 s)
+  Books API Integration Tests
+    GET /api/books
+      ÔêÜ should return a list of active books (138 ms)
+    GET /api/books/:id
+      ÔêÜ should return book details for a valid ID (17 ms)
+      ÔêÜ should return 404 for non-existent book (12 ms)
+    POST /api/books/library
+      ├ù should add book to library when authenticated (94 ms)
+      ÔêÜ should return 401 when not authenticated (11 ms)
+
+  ÔùÅ Books API Integration Tests ÔÇ║ POST /api/books/library ÔÇ║ should add book to library when authenticated
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 403
+
+      94 |                 .send({ bookId: 'book-id-123' });
+      95 |
+    > 96 |             expect(response.status).toBe(200);
+         |                                     ^
+      97 |             expect(response.body.message).toContain('qo\'shildi');
+      98 |         });
+      99 |
+
+      at Object.<anonymous> (tests/books.test.js:96:37)
+
+----------------------|---------|----------|---------|---------|---------------------------------------------------------------------------------
+File                  | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s                                                               
+----------------------|---------|----------|---------|---------|---------------------------------------------------------------------------------
+All files             |   35.94 |    57.14 |   11.11 |   35.94 |                                                                                 
+ backend              |    78.1 |    16.66 |     100 |    78.1 |                                                                                 
+  server.js           |    78.1 |    16.66 |     100 |    78.1 | 72-76,97-100,105-111,118-128,132-134                                            
+ backend/controllers  |   22.05 |    53.84 |     7.4 |   22.05 |                                                                                 
+  admin.controller.js |    13.5 |      100 |       0 |    13.5 | 9-89,96-193,200-263,270-297,304-338,345-378,385-421,428-447                     
+  auth.controller.js  |   13.72 |      100 |       0 |   13.72 | 20-95,102-143,150-262,269-324,331-353,360-411,418-470                           
+  books.controller.js |   43.87 |       40 |   28.57 |   43.87 | 32-35,39-45,49-52,56-59,103-108,164-169,176-244,251-287,294-324,334-360,364-397 
+  user.controller.js  |   17.77 |      100 |       0 |   17.77 | 8-35,42-102,109-139,146-182,189-216                                             
+ backend/middleware   |   51.38 |       70 |   66.66 |   51.38 |                                                                                 
+  auth.middleware.js  |   51.38 |       70 |   66.66 |   51.38 | 22-26,38-42,52-61,69-103,111-125                                                
+ backend/routes       |    96.8 |      100 |       0 |    96.8 |                                                                                 
+  admin.routes.js     |   91.34 |      100 |       0 |   91.34 | 22,25-27,31-35                                                                  
+  auth.routes.js      |     100 |      100 |     100 |     100 |                                                                                 
+  books.routes.js     |     100 |      100 |     100 |     100 |                                                                                 
+  user.routes.js      |     100 |      100 |     100 |     100 |                                                                                 
+ backend/services     |   20.28 |       50 |       0 |   20.28 |                                                                                 
+  email.service.js    |   20.28 |       50 |       0 |   20.28 | 19-23,30-80,87-140,147-205                                                      
+----------------------|---------|----------|---------|---------|---------------------------------------------------------------------------------
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 4 passed, 5 total
+Snapshots:   0 total
+Time:        6.947 s
+Ran all test suites matching /tests\\books.test.js/i.
+  console.error
+    ÔØî Email service error: Error: Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+    535 5.7.8  https://support.google.com/mail/?p=BadCredentials a640c23a62f3a-b802350b75fsm128819166b.60 - gsmtp
+        at SMTPConnection._formatError (C:\Users\saydi\OneDrive\Desktop\Web kutubxona\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+        at SMTPConnection._actionAUTHComplete (C:\Users\saydi\OneDrive\Desktop\Web kutubxona\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1588:34)
+        at SMTPConnection.<anonymous> (C:\Users\saydi\OneDrive\Desktop\Web kutubxona\backend\node_modules\nodemailer\lib\smtp-connection\index.js:556:26)
+        at SMTPConnection._processResponse (C:\Users\saydi\OneDrive\Desktop\Web kutubxona\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+        at SMTPConnection._onData (C:\Users\saydi\OneDrive\Desktop\Web kutubxona\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+        at TLSSocket.SMTPConnection._onSocketData (C:\Users\saydi\OneDrive\Desktop\Web kutubxona\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+        at TLSSocket.emit (node:events:508:28)
+        at addChunk (node:internal/streams/readable:559:12)
+        at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
+        at TLSSocket.Readable.push (node:internal/streams/readable:390:5)
+        at TLSWrap.onStreamRead (node:internal/stream_base_commons:189:23) {
+      code: 'EAUTH',
+      response: '535-5.7.8 Username and Password not accepted. For more information, go to\n' +
+        '535 5.7.8  https://support.google.com/mail/?p=BadCredentials a640c23a62f3a-b802350b75fsm128819166b.60 - gsmtp',
+      responseCode: 535,
+      command: 'AUTH PLAIN'
+    }
+
+    [0m [90m 18 |[39m transporter[33m.[39mverify((error[33m,[39m success) [33m=>[39m {
+     [90m 19 |[39m     [36mif[39m (error) {
+    [31m[1m>[22m[39m[90m 20 |[39m         console[33m.[39merror([32m'ÔØî Email service error:'[39m[33m,[39m error)[33m;[39m
+     [90m    |[39m                 [31m[1m^[22m[39m
+     [90m 21 |[39m     } [36melse[39m {
+     [90m 22 |[39m         console[33m.[39mlog([32m'Ô£à Email service is ready'[39m)[33m;[39m
+     [90m 23 |[39m     }[0m
+
+      at services/email.service.js:20:17
+      at node_modules/nodemailer/lib/smtp-transport/index.js:383:36
+      at SMTPConnection._actionAUTHComplete (node_modules/nodemailer/lib/smtp-connection/index.js:1588:20)
+      at SMTPConnection.<anonymous> (node_modules/nodemailer/lib/smtp-connection/index.js:556:26)
+      at SMTPConnection._processResponse (node_modules/nodemailer/lib/smtp-connection/index.js:993:20)
+      at SMTPConnection._onData (node_modules/nodemailer/lib/smtp-connection/index.js:774:14)
+      at TLSSocket.SMTPConnection._onSocketData (node_modules/nodemailer/lib/smtp-connection/index.js:195:44)
+
+Jest did not exit one second after the test run has completed.
+
+'This usually means that there are asynchronous operations that weren't stopped in your tests. Consider running Jest with `--detectOpenHandles` to troubleshoot this issue.

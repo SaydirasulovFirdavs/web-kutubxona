@@ -1,0 +1,56 @@
+.star-rating {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.star-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.2s;
+    color: var(--color-text-tertiary);
+    /* Default unchecked color */
+}
+
+.star-btn .star {
+    font-size: 1.5rem;
+    transition: color 0.2s;
+}
+
+.star-btn.active {
+    color: #ffd700;
+    /* Gold */
+}
+
+.star-btn.active .star {
+    color: #ffd700;
+    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.4));
+}
+
+.star-rating:not(.read-only) .star-btn:hover {
+    transform: scale(1.2);
+}
+
+/* User interaction states */
+.star-rating:not(.read-only) .star-btn:hover~.star-btn {
+    color: var(--color-text-tertiary);
+    /* Dim stars after hovered one */
+}
+
+/* Sizes */
+.size-sm .star {
+    font-size: 1rem;
+}
+
+.size-md .star {
+    font-size: 1.5rem;
+}
+
+.size-lg .star {
+    font-size: 2rem;
+}
+
+.read-only .star-btn {
+    cursor: default;
+}

@@ -1,0 +1,348 @@
+{
+    "nav": {
+        "home": "Bosh sahifa",
+        "books": "Kitoblar",
+        "library": "Mening kutubxonam",
+        "login": "Kirish",
+        "register": "Ro'yxatdan o'tish",
+        "profile": "Profil",
+        "logout": "Chiqish",
+        "admin": "Admin Panel",
+        "search_placeholder": "Kitob qidirish...",
+        "search_searching": "Qidirilmoqda...",
+        "search_view_all": "Barcha natijalarni ko'rish →"
+    },
+    "home": {
+        "hero_title": "Bilim olami <br> bir marta bosishda",
+        "hero_desc": "Minglab kitoblarni kashf eting. Zamonaviy, qulay va tezkor raqamli kutubxona sizning xizmatingizda.",
+        "start_btn": "Hozir boshlash",
+        "login_btn": "Kirish",
+        "stats_books": "Kitoblar",
+        "stats_readers": "O'quvchilar",
+        "stats_rating": "Reyting",
+        "features_title": "Nega aynan biz?",
+        "feature_1_title": "Katta baza",
+        "feature_1_desc": "Barcha janrlardagi minglab kitoblar to'plami",
+        "feature_2_title": "Tezkor qidiruv",
+        "feature_2_desc": "Kerakli kitobni soniyalar ichida toping",
+        "feature_3_title": "Qulay o'qish",
+        "feature_3_desc": "PDF formatida onlayn o'qish imkoniyati",
+        "cta_title": "Bugunoq o'qishni boshlang",
+        "cta_desc": "Ro'yxatdan o'ting va barcha imkoniyatlardan foydalaning",
+        "featured_books_title": "Kutubxona kitoblari",
+        "view_all_btn": "Barchasini ko'rish",
+        "continue_reading": "O'qishni davom ettiring",
+        "continue_btn": "Davom etish",
+        "explore_genres": "Janrlar bo'ylab sayohat",
+        "explore_genres_desc": "O'zingizga ma'qul bo'lgan yo'nalishni tanlang va bilimlar olamiga sho'ng'ing",
+        "newsletter_title": "Bilimingizni oshirib boring",
+        "newsletter_desc": "Haftalik yangi kitoblar va muhim maqolalar haqida birinchilardan bo'lib xabardor bo'ling.",
+        "newsletter_placeholder": "Email manzilingizni kiriting",
+        "newsletter_btn": "Obuna bo'lish",
+        "featured_books_desc": "Eng sara va ko'p o'qilayotgan kitoblar to'plami",
+        "no_books": "Hozircha kitoblar mavjud emas.",
+        "no_categories": "Turkumlar topilmadi.",
+        "recommended_for_you": "Siz uchun tavsiyalar",
+        "quotes": [
+            {
+                "text": "Kutubxonalar — bu insoniyatning eng buyuk xotirasi.",
+                "author": "Umberto Eko"
+            },
+            {
+                "text": "Yaxshi kitob — eng yaxshi do'st.",
+                "author": "Xalq maqoli"
+            },
+            {
+                "text": "Mutolaa qilgan inson hech qachon yolg'iz qolmaydi.",
+                "author": "Marsel Prust"
+            },
+            {
+                "text": "Kitobsiz uy — ruhsiz tanaga o'xshaydi.",
+                "author": "Siseron"
+            },
+            {
+                "text": "Bilim - bu dunyoni o'zgartirish uchun eng kuchli qurol.",
+                "author": "Nelson Mandela"
+            }
+        ]
+    },
+    "book_detail": {
+        "back_to_books": "Kitoblarga qaytish",
+        "author": "Muallif",
+        "language": "Til",
+        "publisher": "Nashriyot",
+        "year": "Yil",
+        "pages": "Sahifalar",
+        "format": "Format",
+        "views": "Ko'rishlar",
+        "downloads": "Yuklab olishlar",
+        "rating": "Baho",
+        "download_btn": "Yuklab olish",
+        "read_btn": "Onlayn o'qish",
+        "save_btn": "Saqlash",
+        "description": "Tavsif",
+        "author_bio": "Muallif haqida",
+        "write_review": "Fikr bildirish",
+        "rating_label": "Baho:",
+        "comment_placeholder": "Kitob haqida fikringiz...",
+        "submit_btn": "Yuborish",
+        "submitting_btn": "Yuborilmoqda...",
+        "login_to_review": "Fikr bildirish uchun tizimga kiring",
+        "login_btn": "Kirish",
+        "reviews_title": "Sharhlar",
+        "no_reviews": "Hozircha sharhlar yo'q. Birinchi bo'ling!",
+        "not_found": "Kitob topilmadi"
+    },
+    "common": {
+        "loading": "Yuklanmoqda...",
+        "error": "Xatolik yuz berdi",
+        "all": "Hammasi",
+        "books": "kitoblar",
+        "read_now": "O'qish",
+        "unknown_author": "Noma'lum",
+        "success_added": "Muvaffaqiyatli qo'shildi!",
+        "review_added": "Sharh qo'shildi!",
+        "save_success": "Kitob kutubxonaga qo'shildi!",
+        "footer": {
+            "brand_desc": "O'zbekistondagi eng yirik onlayn kutubxona. Biz bilan cheksiz bilim olamiga sayohat qiling.",
+            "col_platform": "Platforma",
+            "col_support": "Yordam",
+            "col_newsletter": "Yangiliklar",
+            "newsletter_desc": "Eng so'nggi kitoblar va yangiliklardan xabardor bo'ling.",
+            "faq": "Ko'p beriladigan savollar",
+            "support": "Qo'llab-quvvatlash",
+            "terms": "Foydalanish shartlari",
+            "privacy": "Maxfiylik siyosati",
+            "rights": "Barcha huquqlar himoyalangan."
+        }
+    },
+    "books_page": {
+        "title": "Kitoblar",
+        "back_btn": "Ortga qaytish",
+        "subtitle_one": "{{count}} ta kitob mavjud",
+        "subtitle_other": "{{count}} ta kitob mavjud",
+        "search_placeholder": "Kitob yoki muallif nomini kiriting...",
+        "search_btn": "Qidirish",
+        "no_books_title": "Kitoblar topilmadi",
+        "no_books_desc": "Boshqa qidiruv so'rovini sinab ko'ring",
+        "unknown_author": "Noma'lum muallif",
+        "prev_page": "Oldingi",
+        "next_page": "Keyingi",
+        "page_info": "Sahifa {{current}} / {{total}}"
+    },
+    "library_page": {
+        "title": "Mening kutubxonam",
+        "subtitle_one": "{{count}} ta kitob saqlangan",
+        "subtitle_other": "{{count}} ta kitob saqlangan",
+        "empty_title": "Kutubxona bo'sh",
+        "empty_desc": "Hali birorta kitob qo'shilmagan",
+        "browse_books": "Kitoblarni ko'rish",
+        "loading_text": "Kutubxona yuklanmoqda...",
+        "remove_tooltip": "Kutubxonadan o'chirish",
+        "confirm_remove": "Rostdan ham bu kitobni kutubxonangizdan o'chirmoqchimisiz?"
+    },
+    "profile_page": {
+        "title": "Mening profilim",
+        "full_name": "To'liq ism",
+        "email": "Email",
+        "password": "Yangi parol (o'zgartirish uchun)",
+        "save_btn": "Saqlash",
+        "saving_btn": "Saqlanmoqda...",
+        "success_msg": "Profil muvaffaqiyatli yangilandi",
+        "tabs": {
+            "info": "Shaxsiy ma'lumotlar",
+            "security": "Xavfsizlik",
+            "library": "Kitoblarim",
+            "downloads": "Yuklanmalar"
+        },
+        "roles": {
+            "user": "Foydalanuvchi",
+            "admin": "Admin",
+            "super_admin": "Super Admin"
+        },
+        "alerts": {
+            "fetch_error": "Profil ma'lumotlarini yuklashda xatolik",
+            "confirm_remove_library": "Bu kitobni kutubxonangizdan o'chirishni xohlaysizmi?",
+            "confirm_remove_history": "Bu kitobni yuklash tarixidan o'chirishni xohlaysizmi?",
+            "remove_success_library": "Kitob kutubxonadan o'chirildi",
+            "remove_success_history": "Tarixdan o'chirildi",
+            "pwd_current_required": "Parolni o'zgartirish uchun joriy parolni kiriting",
+            "pwd_mismatch": "Yangi parollar mos kelmadi",
+            "pwd_min_length": "Parol kamida 6 ta belgidan iborat bo'lishi kerak"
+        },
+        "placeholders": {
+            "name": "Ismingizni kiriting",
+            "current_password": "Joriy parolingizni kiriting",
+            "new_password": "Yangi parol",
+            "confirm_password": "Parolni qaytadan kiriting"
+        },
+        "hints": {
+            "email_change": "Email manzilini o'zgartirish mumkin emas"
+        },
+        "titles": {
+            "saved_books": "Saqlangan kitoblar",
+            "downloaded_books": "Yuklab olingan kitoblar"
+        },
+        "messages": {
+            "no_saved": "Sizda hali saqlangan kitoblar yo'q",
+            "no_downloaded": "Siz hali kitob yuklab olmagansiz"
+        }
+    },
+    "achievements": {
+        "title": "Yutuqlarim 🏆",
+        "count_suffix": "{{count}} ta yutuq",
+        "no_achievements": "Hali yutuqlar yo'q. Mutolaani davom ettiring!",
+        "loading": "Yuklanmoqda..."
+    },
+    "reader": {
+        "loading": "Kitob yuklanmoqda...",
+        "error_load": "Kitobni yuklashda xatolik yuz berdi",
+        "error_not_found": "Kitob topilmadi",
+        "sidebar": {
+            "title": "Mutolaa",
+            "thumbnails": "Thumbnail ko'rinish",
+            "list": "Ro'yxat ko'rinish",
+            "bookmarks": "Xatcho'plar",
+            "highlights": "Ajratilgan matnlar",
+            "empty_bookmarks": "Xatcho'plar mavjud emas",
+            "empty_highlights": "Ajratilgan matnlar mavjud emas",
+            "page_label": "-sahifa"
+        },
+        "header": {
+            "back": "Ortga qaytish",
+            "bookmark_add": "Xatcho'p qo'shish",
+            "bookmark_remove": "Xatcho'pni olib tashlash",
+            "settings": "Kitob sozlamalari",
+            "zoom_in": "Kattalashtirish",
+            "zoom_out": "Kichiklashtirish",
+            "zoom_reset": "Asl o'lchamga qaytarish",
+            "sidebar_open": "Sidebar ochish",
+            "sidebar_close": "Sidebar yopish"
+        },
+        "pdf": {
+            "loading": "PDF yuklanmoqda...",
+            "error": "PDF faylni yuklashda xatolik yuz berdi"
+        },
+        "selection": {
+            "ai": "AI Tushuntirgich",
+            "highlight": "Ajratish",
+            "share": "Ulashish",
+            "note": "Eslatma"
+        },
+        "ai": {
+            "title": "AI Reading Buddy",
+            "loading": "AI o'ylamoqda..."
+        },
+        "settings": {
+            "title": "Kitob sozlamalari",
+            "theme": "Mavzu",
+            "font": "Shrift",
+            "themes": {
+                "light": "Yorug'",
+                "sepia": "Sepiya",
+                "dark": "Tungi",
+                "oled": "OLED"
+            },
+            "fonts": {
+                "sans": "Sans Serif (Zamonaviy)",
+                "serif": "Serif (Klassik)"
+            }
+        },
+        "quote": {
+            "title": "Iqtibos yaratish",
+            "save_btn": "Rasmni saqlash",
+            "preparing": "Rasm tayyorlanmoqda... (Screnshot olishingiz mumkin)"
+        }
+    },
+    "auth": {
+        "email_label": "Email",
+        "password_label": "Parol",
+        "confirm_password_label": "Parolni tasdiqlang",
+        "full_name_label": "To'liq ism",
+        "university_name": "Toshkent Amaliy Fanlar Universiteti",
+        "email_placeholder": "Email manzilingiz",
+        "password_placeholder": "Parolingiz",
+        "forgot_password": "Parolni unutdingizmi?",
+        "login_btn": "Kirish",
+        "logging_in": "Kirilmoqda...",
+        "register_btn": "Ro'yxatdan o'tish",
+        "registering": "Ro'yxatdan o'tilmoqda...",
+        "or": "yoki",
+        "no_account": "Hisobingiz yo'qmi?",
+        "have_account": "Hisobingiz bormi?",
+        "welcome_title": "KUTUBXONA",
+        "welcome_subtitle": "Bilim olamiga xush kelibsiz",
+        "register_subtitle": "Bilim sayohatingizni boshlang",
+        "confirm_placeholder": "Parolni tasdiqlash",
+        "password_mismatch": "Parollar mos kelmayapti",
+        "password_min_length": "Parol kamida 6 ta belgidan iborat bo'lishi kerak"
+    },
+    "login_features": {
+        "feature_1_title": "Minglab kitoblar",
+        "feature_1_desc": "Turli sohalar bo'yicha kitoblar to'plami",
+        "feature_2_title": "Oson qidiruv",
+        "feature_2_desc": "Kerakli kitobni tez toping",
+        "feature_3_title": "Yuklab olish",
+        "feature_3_desc": "Kitoblarni offline o'qish uchun saqlang"
+    },
+    "admin": {
+        "books_management": "Kitoblar boshqaruvi",
+        "add_book": "Yangi kitob qo'shish",
+        "edit_book": "Kitobni tahrirlash",
+        "add_ebook": "Elektron kitob qo'shish",
+        "cancel": "Bekor qilish",
+        "title": "Nomi",
+        "title_placeholder": "Kitob nomini kiriting",
+        "author": "Muallif",
+        "select_author": "Muallifni tanlang",
+        "add_new_author": "Yangi muallif qo'shish",
+        "new_author_name": "Yangi muallif ismi",
+        "new_author_placeholder": "Muallif ismini kiriting",
+        "or_select_existing": "Tanlash",
+        "publisher": "Nashriyot",
+        "publisher_placeholder": "Nashriyot nomini kiriting",
+        "year_of_issue": "Chiqarilgan yili",
+        "language": "Til",
+        "category": "Kategoriya",
+        "select": "Tanlang",
+        "select_category": "Kategoriyani tanlang",
+        "add_new_category": "Qo'shish",
+        "new_category_placeholder": "Kategoriya nomini kiriting",
+        "status": "Holati",
+        "active": "Faol",
+        "inactive": "Nofaol",
+        "type": "Turi",
+        "description": "Tavsif",
+        "description_placeholder": "Kitob haqida tavsif yozing...",
+        "main_book_image": "Asosiy kitob rasmi",
+        "select_image": "Rasm tanlash",
+        "select_file": "Fayl tanlash",
+        "selected": "Tanlangan",
+        "save": "Saqlash",
+        "saving": "Saqlanmoqda...",
+        "table_cover": "MUQOVA",
+        "table_book_info": "KITOB MA'LUMOTLARI",
+        "table_author_lang": "MUALLIF & TIL",
+        "table_status": "HOLATI",
+        "table_actions": "AMALLAR",
+        "confirm_delete": "Rostdan ham bu kitobni o'chirmoqchimisiz?",
+        "book_deleted": "Kitob o'chirildi",
+        "book_added": "Kitob muvaffaqiyatli qo'shildi!",
+        "book_updated": "Kitob muvaffaqiyatli yangilandi!",
+        "upload_pdf": "Iltimos, kitob faylini (PDF) yuklang!",
+        "upload_cover": "Iltimos, kitob muqovasini yuklang!",
+        "no_books": "Hozircha kitoblar yo'q",
+        "add_first_book": "Birinchi kitobni qo'shing",
+        "dashboard": "Boshqaruv paneli",
+        "users": "Foydalanuvchilar",
+        "total_books": "Jami kitoblar",
+        "total_users": "Foydalanuvchilar",
+        "total_downloads": "Yuklab olishlar",
+        "new_users_month": "Yangi foydalanuvchilar (oylik)",
+        "recent_downloads": "So'nggi yuklab olishlar",
+        "book": "Kitob",
+        "user": "Foydalanuvchi",
+        "time": "Vaqt",
+        "no_data": "Ma'lumot yo'q"
+    }
+}

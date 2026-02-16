@@ -1,0 +1,60 @@
+.register-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-xl);
+}
+
+.register-container {
+    width: 100%;
+    max-width: 520px;
+}
+
+.register-card {
+    padding: var(--spacing-3xl);
+    width: 100%;
+}
+
+.register-header {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+}
+
+.register-subtitle {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-lg);
+    margin: 0;
+}
+
+.register-form {
+    margin-top: var(--spacing-2xl);
+}
+
+.alert-success {
+    background: var(--color-success-glow, rgba(16, 185, 129, 0.1));
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: var(--color-success);
+}
+
+.login-link {
+    text-align: center;
+    color: var(--color-text-secondary);
+    margin-top: var(--spacing-xl);
+    margin-bottom: 0;
+}
+
+.login-link a {
+    color: var(--color-primary-light);
+    font-weight: var(--font-weight-medium);
+}
+
+@media (max-width: 640px) {
+    .register-page {
+        padding: var(--spacing-md);
+    }
+
+    .register-card {
+        padding: var(--spacing-xl);
+    }
+}

@@ -1,0 +1,303 @@
+{
+    "nav": {
+        "home": "Home",
+        "books": "Books",
+        "library": "My Library",
+        "login": "Login",
+        "register": "Register",
+        "profile": "Profile",
+        "logout": "Logout",
+        "admin": "Admin Panel",
+        "search_placeholder": "Search books...",
+        "search_searching": "Searching...",
+        "search_view_all": "View all results →"
+    },
+    "home": {
+        "hero_title": "World of knowledge <br> in one click",
+        "hero_desc": "Discover thousands of books. Modern, convenient, and fast digital library at your service.",
+        "start_btn": "Get Started",
+        "login_btn": "Login",
+        "stats_books": "Books",
+        "stats_readers": "Readers",
+        "stats_rating": "Rating",
+        "features_title": "Why Choose Us?",
+        "feature_1_title": "Huge Database",
+        "feature_1_desc": "Collection of thousands of books in all genres",
+        "feature_2_title": "Fast Search",
+        "feature_2_desc": "Find the book you need in seconds",
+        "feature_3_title": "Easy Reading",
+        "feature_3_desc": "Ability to read online in PDF format",
+        "cta_title": "Start Reading Today",
+        "cta_desc": "Register and enjoy all features",
+        "continue_reading": "Continue Reading",
+        "continue_btn": "Continue",
+        "explore_genres": "Explore Genres",
+        "explore_genres_desc": "Choose your preferred direction and dive into the world of knowledge",
+        "newsletter_title": "Keep Expanding Your Knowledge",
+        "newsletter_desc": "Be the first to know about weekly new books and important articles.",
+        "newsletter_placeholder": "Enter your email address",
+        "newsletter_btn": "Subscribe"
+    },
+    "book_detail": {
+        "back_to_books": "Back to Books",
+        "author": "Author",
+        "language": "Language",
+        "publisher": "Publisher",
+        "year": "Year",
+        "pages": "Pages",
+        "format": "Format",
+        "views": "Views",
+        "downloads": "Downloads",
+        "rating": "Rating",
+        "download_btn": "Download",
+        "read_btn": "Read Online",
+        "save_btn": "Save",
+        "description": "Description",
+        "author_bio": "About Author",
+        "write_review": "Write a Review",
+        "rating_label": "Rating:",
+        "comment_placeholder": "Your thoughts on this book...",
+        "submit_btn": "Submit",
+        "submitting_btn": "Submitting...",
+        "login_to_review": "Log in to write a review",
+        "login_btn": "Login",
+        "reviews_title": "Reviews",
+        "no_reviews": "No reviews yet. Be the first!",
+        "not_found": "Book not found"
+    },
+    "common": {
+        "loading": "Loading...",
+        "error": "An error occurred",
+        "all": "All",
+        "books": "books",
+        "read_now": "Read"
+    },
+    "books_page": {
+        "title": "Books",
+        "subtitle_one": "{{count}} book available",
+        "subtitle_other": "{{count}} books available",
+        "search_placeholder": "Search by book title or author...",
+        "search_btn": "Search",
+        "no_books_title": "No books found",
+        "no_books_desc": "Try a different search query",
+        "unknown_author": "Unknown Author",
+        "prev_page": "Previous",
+        "next_page": "Next",
+        "page_info": "Page {{current}} / {{total}}"
+    },
+    "library_page": {
+        "title": "My Library",
+        "subtitle_one": "{{count}} book saved",
+        "subtitle_other": "{{count}} books saved",
+        "empty_title": "Library is empty",
+        "empty_desc": "No books added yet",
+        "browse_books": "Browse Books",
+        "loading_text": "Loading library...",
+        "remove_tooltip": "Remove from library",
+        "confirm_remove": "Are you sure you want to remove this book from your library?"
+    },
+    "profile_page": {
+        "title": "My Profile",
+        "full_name": "Full Name",
+        "email": "Email",
+        "password": "New Password (optional)",
+        "save_btn": "Save Changes",
+        "saving_btn": "Saving...",
+        "success_msg": "Profile updated successfully",
+        "tabs": {
+            "info": "Personal Info",
+            "security": "Security",
+            "library": "My Books",
+            "downloads": "Downloads"
+        },
+        "roles": {
+            "user": "User",
+            "admin": "Admin",
+            "super_admin": "Super Admin"
+        },
+        "alerts": {
+            "fetch_error": "Error loading profile data",
+            "confirm_remove_library": "Are you sure you want to remove this book from your library?",
+            "confirm_remove_history": "Are you sure you want to remove this book from download history?",
+            "remove_success_library": "Book removed from library",
+            "remove_success_history": "Removed from history",
+            "pwd_current_required": "Enter current password to change password",
+            "pwd_mismatch": "New passwords do not match",
+            "pwd_min_length": "Password must be at least 6 characters"
+        },
+        "placeholders": {
+            "name": "Enter your name",
+            "current_password": "Enter current password",
+            "new_password": "New password",
+            "confirm_password": "Enter password again"
+        },
+        "hints": {
+            "email_change": "Email address cannot be changed"
+        },
+        "titles": {
+            "saved_books": "Saved Books",
+            "downloaded_books": "Downloaded Books"
+        },
+        "messages": {
+            "no_saved": "No saved books yet",
+            "no_downloaded": "No downloaded books yet"
+        }
+    },
+    "achievements": {
+        "title": "My Achievements 🏆",
+        "count_suffix": "{{count}} achievements",
+        "no_achievements": "No achievements yet. Keep reading!",
+        "loading": "Loading..."
+    },
+    "reader": {
+        "loading": "Loading book...",
+        "error_load": "Error loading book",
+        "error_not_found": "Book not found",
+        "sidebar": {
+            "title": "Reading",
+            "thumbnails": "Thumbnails",
+            "list": "List",
+            "bookmarks": "Bookmarks",
+            "highlights": "Highlights",
+            "empty_bookmarks": "No bookmarks",
+            "empty_highlights": "No highlights",
+            "page_label": "page"
+        },
+        "header": {
+            "back": "Back",
+            "bookmark_add": "Add bookmark",
+            "bookmark_remove": "Remove bookmark",
+            "settings": "Reader settings",
+            "zoom_in": "Zoom in",
+            "zoom_out": "Zoom out",
+            "zoom_reset": "Reset zoom",
+            "sidebar_open": "Open sidebar",
+            "sidebar_close": "Close sidebar"
+        },
+        "pdf": {
+            "loading": "Loading PDF...",
+            "error": "Error loading PDF file"
+        },
+        "selection": {
+            "ai": "AI Explainer",
+            "highlight": "Highlight",
+            "share": "Share",
+            "note": "Note"
+        },
+        "ai": {
+            "title": "AI Reading Buddy",
+            "loading": "AI is thinking..."
+        },
+        "settings": {
+            "title": "Reader Settings",
+            "theme": "Theme",
+            "font": "Font",
+            "themes": {
+                "light": "Light",
+                "sepia": "Sepia",
+                "dark": "Dark",
+                "oled": "OLED"
+            },
+            "fonts": {
+                "sans": "Sans Serif (Modern)",
+                "serif": "Serif (Classic)"
+            }
+        },
+        "quote": {
+            "title": "Create Quote",
+            "save_btn": "Save Image",
+            "preparing": "Preparing image... (You can take a screenshot)"
+        }
+    },
+    "auth": {
+        "email_label": "Email",
+        "password_label": "Password",
+        "confirm_password_label": "Confirm Password",
+        "full_name_label": "Full Name",
+        "full_name_placeholder": "Your full name",
+        "email_placeholder": "email@example.com",
+        "password_placeholder": "••••••••",
+        "forgot_password": "Forgot password?",
+        "login_btn": "Login",
+        "logging_in": "Logging in...",
+        "register_btn": "Register",
+        "registering": "Registering...",
+        "or": "or",
+        "no_account": "Don't have an account?",
+        "have_account": "Already have an account?",
+        "welcome_title": "Web Kutubxona",
+        "welcome_subtitle": "Welcome to the world of knowledge",
+        "register_subtitle": "Start your journey of knowledge",
+        "university_name": "Tashkent University of Applied Sciences",
+        "password_mismatch": "Passwords do not match",
+        "password_min_length": "Password must be at least 6 characters"
+    },
+    "login_features": {
+        "feature_1_title": "Thousands of Books",
+        "feature_1_desc": "Collection of books in various genres",
+        "feature_2_title": "Easy Search",
+        "feature_2_desc": "Find the book you need in seconds",
+        "feature_3_title": "Download",
+        "feature_3_desc": "Save books to read offline"
+    },
+    "admin": {
+        "books_management": "Books Management",
+        "add_book": "Add New Book",
+        "edit_book": "Edit Book",
+        "add_ebook": "Add eBook",
+        "cancel": "Cancel",
+        "title": "Title",
+        "title_placeholder": "Enter book title",
+        "author": "Author",
+        "select_author": "Select Author",
+        "add_new_author": "Add new author",
+        "new_author_name": "New author name",
+        "new_author_placeholder": "Enter author name",
+        "or_select_existing": "Select existing author",
+        "publisher": "Publisher",
+        "publisher_placeholder": "Enter publisher name",
+        "year_of_issue": "Year of Issue",
+        "language": "Language",
+        "category": "Category",
+        "select": "Select",
+        "select_category": "Select category",
+        "add_new_category": "Add new category",
+        "new_category_placeholder": "Enter category name",
+        "status": "Status",
+        "active": "Active",
+        "inactive": "Inactive",
+        "type": "Type",
+        "description": "Description",
+        "description_placeholder": "Write a description about the book...",
+        "main_book_image": "Main book image",
+        "select_image": "Select Image",
+        "select_file": "Select File",
+        "selected": "Selected",
+        "save": "Save",
+        "saving": "Saving...",
+        "table_cover": "COVER",
+        "table_book_info": "BOOK INFO",
+        "table_author_lang": "AUTHOR & LANGUAGE",
+        "table_status": "STATUS",
+        "table_actions": "ACTIONS",
+        "confirm_delete": "Are you sure you want to delete this book?",
+        "book_deleted": "Book deleted",
+        "book_added": "Book added successfully!",
+        "book_updated": "Book updated successfully!",
+        "upload_pdf": "Please upload a book file (PDF)!",
+        "upload_cover": "Please upload a book cover!",
+        "no_books": "No books yet",
+        "add_first_book": "Add the first book",
+        "dashboard": "Dashboard",
+        "users": "Users",
+        "total_books": "Total books",
+        "total_users": "Users",
+        "total_downloads": "Downloads",
+        "new_users_month": "New users (monthly)",
+        "recent_downloads": "Recent downloads",
+        "book": "Book",
+        "user": "User",
+        "time": "Time",
+        "no_data": "No data"
+    }
+}

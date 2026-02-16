@@ -1,0 +1,31 @@
+config:
+  target: "http://localhost:5000/api"
+  phases:
+    - duration: 60
+      arrivalRate: 5
+      name: Warm up
+    - duration: 120
+      arrivalRate: 5
+      rampTo: 50
+      name: Ramp up load
+    - duration: 300
+      arrivalRate: 50
+      name: Sustained load
+  defaults:
+    headers:
+      Content-Type: "application/json"
+
+scenarios:
+  - name: "Browse books"
+    flow:
+      - get:
+          url: "/books?limit=10"
+      - think: 2
+      - get:
+          url: "/books/1" # Assuming some ID exists or we use random ones if we had a data source
+      - think: 5
+  - name: "Search books"
+    flow:
+      - get:
+          url: "/books?search=test"
+      - think: 3

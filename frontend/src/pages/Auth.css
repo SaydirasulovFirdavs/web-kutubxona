@@ -1,0 +1,343 @@
+/* ============================================
+   AUTH PAGES - SCREENSHOT MATCH REDESIGN
+   ============================================ */
+
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    background: #fff;
+    overflow: hidden;
+    position: relative;
+}
+
+/* --- Left Side: Full illustration area --- */
+.auth-left {
+    flex: 1.25;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 2rem;
+}
+
+/* Soft decoration blobs to match illustration style */
+.auth-left::before {
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, #e0f2fe 0%, transparent 70%);
+    top: 10%;
+    left: 10%;
+    opacity: 0.6;
+}
+
+.auth-illustration-wrapper {
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    z-index: 2;
+}
+
+.auth-illustration {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* --- Right Side: Blue Panel --- */
+.auth-right {
+    flex: 0.85;
+    background: #26499a;
+    /* Deep professional blue from screenshot */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    position: relative;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 380px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- University Branding --- */
+.university-branding {
+    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+    justify-content: center;
+}
+
+.uni-logo-img {
+    height: 70px;
+    width: auto;
+    filter: brightness(0) invert(1);
+}
+
+.university-name {
+    color: #ffffff;
+    font-size: 1.35rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.1;
+    letter-spacing: 0.05em;
+    max-width: 250px;
+    text-align: left;
+}
+
+/* --- Input Fields (Pill shape with icon section) --- */
+.auth-input-group {
+    width: 100%;
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 9999px;
+    /* Full pill shape */
+    overflow: hidden;
+    height: 54px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1.5px solid transparent;
+}
+
+.auth-input-group:focus-within {
+    box-shadow: 0 10px 25px rgba(38, 73, 154, 0.15);
+    transform: translateY(-2px);
+    border-color: rgba(38, 73, 154, 0.3);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.auth-input-icon-section {
+    width: 60px;
+    height: 100%;
+    background: #e2e8f0;
+    /* Soft grey/indigo background for icon */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #475569;
+    border-right: 1px solid #cbd5e1;
+}
+
+.auth-input {
+    flex: 1;
+    height: 100%;
+    background: transparent;
+    border: none;
+    padding: 0 1.5rem;
+    font-size: 1rem;
+    color: #1e293b;
+    outline: none;
+}
+
+.auth-input::placeholder {
+    color: #94a3b8;
+}
+
+.password-toggle {
+    background: none;
+    border: none;
+    padding: 0 1.25rem;
+    height: 100%;
+    color: #64748b;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-left: 1px solid #e2e8f0;
+}
+
+/* --- Submit Button (Pill shape, lavender/blue) --- */
+.auth-submit-btn {
+    margin-top: 1.5rem;
+    width: auto;
+    min-width: 160px;
+    padding: 0 2rem;
+    height: 50px;
+    background: #8a99d4;
+    /* Soft blue/purple from screenshot */
+    color: white;
+    border: none;
+    border-radius: 9999px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s;
+}
+
+.auth-submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    background: #7a89c4;
+}
+
+.auth-submit-btn svg {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    padding: 4px;
+}
+
+/* --- Footer --- */
+.auth-footer {
+    margin-top: 2rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+}
+
+.auth-footer a {
+    color: #ffffff;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+/* --- Language Switcher --- */
+.auth-lang-wrapper {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* --- Entrance Animations --- */
+.animate-fade-in-left {
+    animation: fadeInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in-right {
+    animation: fadeInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-up {
+    animation: slideUpFade 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideUpFade {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Floating Animation for Illustration */
+.floating {
+    animation: floating 4s ease-in-out infinite;
+}
+
+@keyframes floating {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+
+
+.auth-form {
+    width: 100%;
+}
+
+.auth-submit-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-submit-btn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: rotate(45deg);
+    transition: all 0.6s;
+    pointer-events: none;
+}
+
+.auth-submit-btn:hover::after {
+    left: 100%;
+    top: 100%;
+}
+
+/* --- Responsive --- */
+@media (max-width: 992px) {
+    .auth-left {
+        display: none;
+    }
+
+    .auth-right {
+        flex: 1;
+        padding: 2rem;
+    }
+
+    .auth-container {
+        max-width: 100%;
+    }
+
+    .university-branding {
+        flex-direction: column;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .university-name {
+        text-align: center;
+        font-size: 1.1rem;
+    }
+}

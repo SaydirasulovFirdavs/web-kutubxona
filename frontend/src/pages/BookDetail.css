@@ -1,0 +1,304 @@
+.book-detail-page {
+    min-height: 100vh;
+    padding: var(--spacing-3xl) 0;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    color: var(--color-primary);
+    text-decoration: none;
+    margin-bottom: var(--spacing-xl);
+    font-size: var(--font-size-base);
+    transition: var(--transition-base);
+}
+
+.back-link:hover {
+    transform: translateX(-4px);
+    color: var(--color-primary-glow);
+}
+
+/* Book Header */
+.book-header {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: var(--spacing-3xl);
+    margin-bottom: var(--spacing-3xl);
+    padding: var(--spacing-2xl);
+    border-radius: var(--radius-xl);
+}
+
+.book-cover-large {
+    width: 100%;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-xl);
+    position: relative;
+}
+
+.book-cover-large img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.book-cover-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 6rem;
+    background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-bg-tertiary) 100%);
+    color: var(--color-text-tertiary);
+}
+
+/* Main Info */
+.book-main-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.book-title {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-bold);
+    margin: 0;
+    line-height: 1.2;
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.book-author {
+    font-size: var(--font-size-xl);
+    color: var(--color-text-secondary);
+}
+
+.book-meta-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg);
+    background: var(--color-surface);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+}
+
+.meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    min-width: 100px;
+}
+
+.meta-label {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.meta-value {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+}
+
+/* Stats */
+.book-stats-large {
+    display: flex;
+    gap: var(--spacing-xl);
+    padding: var(--spacing-lg);
+    background: var(--color-surface);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.stat-icon {
+    font-size: var(--font-size-2xl);
+    margin-bottom: 4px;
+}
+
+.stat-value {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+}
+
+.stat-label {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-tertiary);
+}
+
+/* Actions */
+.book-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-top: auto;
+    flex-wrap: wrap;
+}
+
+.btn-lg {
+    padding: 0.8rem 1.5rem;
+    font-size: 1.1rem;
+}
+
+/* Content Grid */
+.book-content-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: var(--spacing-2xl);
+}
+
+.book-section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.book-section.card {
+    padding: var(--spacing-xl);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(12px);
+}
+
+.book-section h2 {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-text-primary);
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: var(--spacing-md);
+}
+
+.book-description,
+.author-bio {
+    font-size: var(--font-size-base);
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+/* Reviews */
+.review-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-text-secondary);
+}
+
+.auth-message-box {
+    text-align: center;
+    padding: var(--spacing-xl);
+    background: rgba(var(--color-primary-rgb), 0.05);
+    border-radius: var(--radius-md);
+}
+
+.auth-message-box p {
+    margin-bottom: var(--spacing-md);
+}
+
+.reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.review-item {
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.review-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-sm);
+}
+
+.review-author {
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+}
+
+.review-date {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-tertiary);
+}
+
+.review-rating {
+    margin-bottom: var(--spacing-sm);
+}
+
+.review-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+}
+
+.no-reviews {
+    text-align: center;
+    color: var(--color-text-tertiary);
+    padding: var(--spacing-xl);
+    font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .book-content-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .book-header {
+        grid-template-columns: 1fr;
+        padding: var(--spacing-lg);
+    }
+
+    .book-cover-large {
+        width: 180px;
+        margin: 0 auto;
+    }
+
+    .book-main-info {
+        text-align: center;
+    }
+
+    .book-meta-grid {
+        justify-content: center;
+    }
+
+    .book-stats-large {
+        justify-content: center;
+    }
+
+    .book-actions {
+        justify-content: center;
+    }
+
+    .book-title {
+        font-size: 2rem;
+    }
+}
