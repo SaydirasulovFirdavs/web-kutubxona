@@ -45,9 +45,16 @@ app.use((req, res, next) => {
     next();
 });
 
-// Security headers - Customize for PDF loading
+// Security headers - Customize for PDF loading and previews
 app.use(helmet({
     crossOriginResourcePolicy: { policy: "cross-origin" },
+    contentSecurityPolicy: {
+        directives: {
+            ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+            "img-src": ["'self'", "data:", "blob:", "https:"],
+            "connect-src": ["'self'", "https:", "http:"],
+        },
+    },
 }));
 
 // CORS
@@ -136,9 +143,9 @@ if (process.env.NODE_ENV === 'production') {
     // Serve static files from frontend build
     app.use(express.static(frontendPath));
 
-    // Handle SPA routing - deliver index.html for any unknown route (except /api)
+    // Handle SPA routing - deliver index.html for any unknown route (except /api and /uploads)
     app.get('*', (req, res, next) => {
-        if (req.path.startsWith('/api')) {
+        if (req.path.startsWith('/api') || req.path.startsWith('/uploads')) {
             return next();
         }
         res.sendFile(path.join(frontendPath, 'index.html'));
