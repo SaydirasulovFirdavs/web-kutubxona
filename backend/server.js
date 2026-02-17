@@ -193,7 +193,8 @@ if (process.env.NODE_ENV !== 'test') {
     ╚═══════════════════════════════════════════╝
         `);
 
-        // Self-ping to stay awake on Render (Free Tier)
+        // Self-ping to stay awake on Render (Disabled to save Free Tier hours)
+        /* 
         if (process.env.NODE_ENV === 'production') {
             const SITE_URL = 'https://web-kutubxona.onrender.com';
             setInterval(() => {
@@ -202,15 +203,15 @@ if (process.env.NODE_ENV !== 'test') {
                         .then(res => console.log(`[Self-Ping] Awake: ${res.status}`))
                         .catch(err => console.error(`[Self-Ping] Error: ${err.message}`));
                 }).catch(() => {
-                    // Fallback to native fetch if node-fetch not found (Node 18+)
                     if (global.fetch) {
                         global.fetch(`${SITE_URL}/health`)
                             .then(res => console.log(`[Self-Ping] Awake: ${res.status}`))
                             .catch(err => console.error(`[Native-Ping] Error: ${err.message}`));
                     }
                 });
-            }, 14 * 60 * 1000); // 14 minutes
+            }, 14 * 60 * 1000);
         }
+        */
     });
 }
 
