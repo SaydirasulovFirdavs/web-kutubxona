@@ -166,35 +166,32 @@ app.use((err, req, res, next) => {
 // ============================================
 
 if (process.env.NODE_ENV !== 'test') {
-    app.listen(PORT, () => {
+    app.listen(PORT, '0.0.0.0', async () => {
         console.log(`
     ╔═══════════════════════════════════════════╗
     ║   📚 Web Kutubxona API Server            ║
     ║   🚀 Server running on port ${PORT}         ║
+    ║   🌐 Binding to: 0.0.0.0                  ║
     ║   🌍 Environment: ${process.env.NODE_ENV || 'development'}           ║
     ║   📡 Frontend URL: ${process.env.FRONTEND_URL || 'http://localhost:5173'} ║
     ╚═══════════════════════════════════════════╝
         `);
 
-        // Self-ping to stay awake on Render (Disabled to save Free Tier hours)
-        /* 
-        if (process.env.NODE_ENV === 'production') {
-            const SITE_URL = 'https://web-kutubxona.onrender.com';
-            setInterval(() => {
-                import('node-fetch').then(({ default: fetch }) => {
-                    fetch(`${SITE_URL}/health`)
-                        .then(res => console.log(`[Self-Ping] Awake: ${res.status}`))
-                        .catch(err => console.error(`[Self-Ping] Error: ${err.message}`));
-                }).catch(() => {
-                    if (global.fetch) {
-                        global.fetch(`${SITE_URL}/health`)
-                            .then(res => console.log(`[Self-Ping] Awake: ${res.status}`))
-                            .catch(err => console.error(`[Native-Ping] Error: ${err.message}`));
-                    }
-                });
-            }, 14 * 60 * 1000);
+        // Database Background Tasks (Production only or as needed)
+        try {
+            console.log('⏳ Starting background database check...');
+            const { initDB } = await import('./init_db.js');
+            const { seedAdmin } = await import('./seed_admin.js');
+
+            await initDB();
+            console.log('✅ DB Schema verified.');
+
+            await seedAdmin();
+            console.log('✅ Admin credentials verified.');
+        } catch (dbErr) {
+            console.error('⚠️ Background DB init warning:', dbErr.message);
+            // We don't exit(1) here to keep the server alive even if DB has issues temporarily
         }
-        */
     });
 }
 
