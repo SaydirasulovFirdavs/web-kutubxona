@@ -22,7 +22,7 @@ const config = process.env.DATABASE_URL
         database: process.env.DB_NAME || 'web_kutubxona',
     };
 
-async function seedAdmin() {
+export async function seedAdmin() {
     const client = new Client(config);
 
     try {
@@ -31,7 +31,8 @@ async function seedAdmin() {
         // 1. Get Super Admin Role ID
         const roleRes = await client.query("SELECT id FROM roles WHERE name = 'super_admin'");
         if (roleRes.rows.length === 0) {
-            throw new Error("Role 'super_admin' not found. Please run schema.sql first.");
+            console.error("Role 'super_admin' not found. Please run schema.sql first.");
+            return; // Don't crash, just skip
         }
         const superAdminRoleId = roleRes.rows[0].id;
 
@@ -63,31 +64,22 @@ async function seedAdmin() {
             userId = res.rows[0].id;
         }
 
-        console.log(`Admin user seeded successfully. Email: ${email}, Password: ${password}`);
+        console.log(`✅ Admin user seeded successfully. Email: ${email}`);
 
         // 4. Run additional test data if exists
         const testDataPath = path.resolve(__dirname, '../database/test_data.sql');
         if (fs.existsSync(testDataPath)) {
             console.log('Running test_data.sql...');
             let testSql = fs.readFileSync(testDataPath, 'utf8');
-
-            // Execute statements one by one or as a block? 
-            // Simple split by ; might be enough for this simple file
-            // But pg driver can handle multiple statements if parameterized correctly? 
-            // Actually client.query usually runs one statement. 
-            // Let's rely on the file structure or just read it. 
-            // Better to wrap in transaction?
-            // Since test_data.sql contains subqueries, it should be fine.
-
             await client.query(testSql);
             console.log('Test data executed.');
         }
 
     } catch (err) {
         console.error('Error seeding admin:', err);
+        // Throwing error back to startup.js
+        throw err;
     } finally {
         await client.end();
     }
 }
-
-seedAdmin();

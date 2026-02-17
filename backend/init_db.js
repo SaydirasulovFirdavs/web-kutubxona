@@ -22,7 +22,7 @@ const config = process.env.DATABASE_URL
         database: 'postgres',
     };
 
-async function initDB() {
+export async function initDB() {
     console.log('Connecting to PostgreSQL...');
 
     // If using DATABASE_URL, we usually connect directly to the target DB
@@ -40,8 +40,9 @@ async function initDB() {
             }
             await client.end();
         } catch (err) {
-            console.error('Error:', err);
-            process.exit(1);
+            console.error('Error during schema execution:', err);
+            // Don't exit process, just throw to let caller handle it
+            throw err;
         }
         return;
     }
@@ -66,9 +67,7 @@ async function initDB() {
         }
         await dbClient.end();
     } catch (err) {
-        console.error('Error:', err);
-        process.exit(1);
+        console.error('Error during DB init:', err);
+        throw err;
     }
 }
-
-initDB();

@@ -5,10 +5,10 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node init_db.js && node seed_admin.js && node server.js",
+    "start": "node startup.js",
     "init-db": "node init_db.js",
     "seed-admin": "node seed_admin.js",
-    "dev": "nodemon server.js",
+    "dev": "nodemon startup.js",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
   },
   "keywords": [
