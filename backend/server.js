@@ -38,6 +38,9 @@ import statsRoutes from './routes/stats.routes.js';
 dotenv.config();
 
 const app = express();
+
+// Trust proxy for Railway/Load Balancers
+app.set('trust proxy', 1);
 const PORT = process.env.PORT || 5000;
 
 // ============================================
@@ -147,6 +150,10 @@ app.use('/api', (req, res) => {
         message: 'API Route topilmadi'
     });
 });
+
+// Health Check
+app.get('/health', (req, res) => res.json({ status: 'UP', timestamp: new Date().toISOString() }));
+app.get('/api/health', (req, res) => res.json({ status: 'UP', timestamp: new Date().toISOString() }));
 
 // Global error handler
 app.use((err, req, res, next) => {
