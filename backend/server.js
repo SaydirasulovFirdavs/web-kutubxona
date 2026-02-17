@@ -1,3 +1,8 @@
+console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+console.log('!! SERVER.JS STARTING AT:', new Date().toISOString());
+console.log('!! CWD:', process.cwd());
+console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
