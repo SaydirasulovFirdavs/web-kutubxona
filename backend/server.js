@@ -60,22 +60,28 @@ app.use(helmet({
 // CORS
 const allowedOrigins = [
     process.env.FRONTEND_URL,
+    'https://web-kutubxona-production.up.railway.app',
     'http://localhost:5173',
-    'http://localhost:3000',
-    'https://web-kutubxona.onrender.com'
+    'http://localhost:3000'
 ].filter(Boolean);
 
 app.use(cors({
     origin: (origin, callback) => {
-        // Allow requests with no origin (like mobile apps or curl)
+        // Allow requests with no origin (like mobile apps, curl, or same-origin requests)
         if (!origin) return callback(null, true);
-        if (allowedOrigins.indexOf(origin) !== -1 || process.env.NODE_ENV !== 'production') {
+
+        // Check if the origin is allowed or if we are not in production
+        const isAllowed = allowedOrigins.some(ao => origin.startsWith(ao));
+        if (isAllowed || process.env.NODE_ENV !== 'production') {
             callback(null, true);
         } else {
+            console.warn(`CORS blocked request from origin: ${origin}`);
             callback(new Error('Not allowed by CORS'));
         }
     },
-    credentials: true
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 // Body parser
