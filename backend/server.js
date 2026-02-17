@@ -82,11 +82,8 @@ app.use(cors({
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// Serve static files (uploads) with logging
-app.use('/uploads', (req, res, next) => {
-    console.log(`[Static] Serving file: ${req.url}`);
-    next();
-}, express.static(path.join(__dirname, 'uploads')));
+// Serve uploaded books
+app.use('/uploads', express.static(uploadDir));
 
 // Rate limiting
 const limiter = rateLimit({
@@ -99,39 +96,22 @@ const limiter = rateLimit({
 
 app.use('/api/', limiter);
 
-// Stricter rate limiting for auth endpoints
-const authLimiter = (req, res, next) => next();
-
 // ============================================
 // ROUTES
 // ============================================
 
-// Health check
+// API Routes
+// ============================================
+
 app.get('/health', (req, res) => {
-    res.json({
-        success: true,
-        message: 'Web Kutubxona API is running',
-        timestamp: new Date().toISOString()
-    });
+    res.status(200).json({ status: 'OK', uptime: process.uptime() });
 });
 
-// Auth routes
-app.use('/api/auth/login', authLimiter);
 app.use('/api/auth', authRoutes);
-
-// Books routes
 app.use('/api/books', booksRoutes);
-
-// User routes
 app.use('/api/user', userRoutes);
-
-// Admin routes
 app.use('/api/admin', adminRoutes);
-
-// Stats routes
 app.use('/api/stats', statsRoutes);
-
-// Already served above
 
 // ============================================
 // FRONTEND SERVING (Production)
@@ -141,35 +121,26 @@ if (process.env.NODE_ENV === 'production') {
     const frontendPath = path.resolve(__dirname, '../frontend/dist');
     console.log(`[Production] Serving frontend from: ${frontendPath}`);
 
-    if (fs.existsSync(frontendPath)) {
-        console.log('✅ Frontend dist directory found');
-        const files = fs.readdirSync(frontendPath);
-        console.log('Static files in dist:', files);
-
-        const indexPath = path.join(frontendPath, 'index.html');
-        if (fs.existsSync(indexPath)) {
-            const indexContent = fs.readFileSync(indexPath, 'utf8');
-            console.log('Index.html snippet:', indexContent.substring(0, 300));
-        } else {
-            console.error('❌ index.html NOT found in dist!');
-        }
-    } else {
-        console.error('❌ Frontend dist directory NOT found!');
-    }
-
     // Serve static files from frontend build
     app.use(express.static(frontendPath));
 
-    // Handle SPA routing - deliver index.html for any unknown route (except /api and /uploads)
+    // Handle SPA routing
     app.get('*', (req, res, next) => {
+        // Skip API and uploads
         if (req.path.startsWith('/api') || req.path.startsWith('/uploads')) {
             return next();
         }
+
         const indexPath = path.join(frontendPath, 'index.html');
+        // Extra check for index.html existence to provide helpful error
         if (fs.existsSync(indexPath)) {
             res.sendFile(indexPath);
         } else {
-            res.status(404).send('Frontend index.html topilmadi. Build jarayonini tekshiring.');
+            res.status(404).send(`
+                <h1>Frontend index.html topilmadi</h1>
+                <p>Qidirilayotgan joy: ${indexPath}</p>
+                <p>Mavjud fayllar: ${fs.existsSync(frontendPath) ? fs.readdirSync(frontendPath).join(', ') : 'Papkasi yo\'q'}</p>
+            `);
         }
     });
 }
