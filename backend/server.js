@@ -138,7 +138,16 @@ app.use('/api/stats', statsRoutes);
 // ============================================
 
 if (process.env.NODE_ENV === 'production') {
-    const frontendPath = path.join(__dirname, '../frontend/dist');
+    const frontendPath = path.resolve(__dirname, '../frontend/dist');
+    console.log(`[Production] Serving frontend from: ${frontendPath}`);
+
+    if (fs.existsSync(frontendPath)) {
+        console.log('✅ Frontend dist directory found');
+    } else {
+        console.error('❌ Frontend dist directory NOT found! Build might have failed or path is wrong.');
+        console.log('Current __dirname:', __dirname);
+        console.log('Static files in parent:', fs.readdirSync(path.join(__dirname, '..')));
+    }
 
     // Serve static files from frontend build
     app.use(express.static(frontendPath));
@@ -148,7 +157,12 @@ if (process.env.NODE_ENV === 'production') {
         if (req.path.startsWith('/api') || req.path.startsWith('/uploads')) {
             return next();
         }
-        res.sendFile(path.join(frontendPath, 'index.html'));
+        const indexPath = path.join(frontendPath, 'index.html');
+        if (fs.existsSync(indexPath)) {
+            res.sendFile(indexPath);
+        } else {
+            res.status(404).send('Frontend index.html topilmadi. Build jarayonini tekshiring.');
+        }
     });
 }
 
