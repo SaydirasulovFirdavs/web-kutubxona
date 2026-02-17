@@ -83,9 +83,13 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // Serve uploaded books
 app.use('/uploads', express.static(uploadDir));
 
+// Health Checks (Unprotected)
+app.get('/health', (req, res) => res.json({ status: 'UP', timestamp: new Date().toISOString() }));
+app.get('/api/health', (req, res) => res.json({ status: 'UP', timestamp: new Date().toISOString() }));
+
 // Rate limiting
 const limiter = rateLimit({
-    windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS) || 15 * 60 * 1000, // 15 minutes
+    windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS) || 15 * 60 * 1000,
     max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS) || 100,
     message: 'Juda ko\'p so\'rovlar yuborildi, keyinroq qayta urinib ko\'ring',
     standardHeaders: true,
@@ -98,13 +102,6 @@ app.use('/api/', limiter);
 // ROUTES
 // ============================================
 
-// API Routes
-// ============================================
-
-app.get('/health', (req, res) => {
-    res.status(200).json({ status: 'OK', uptime: process.uptime() });
-});
-
 app.use('/api/auth', authRoutes);
 app.use('/api/books', booksRoutes);
 app.use('/api/user', userRoutes);
@@ -114,46 +111,22 @@ app.use('/api/stats', statsRoutes);
 // ============================================
 // FRONTEND SERVING (Production)
 // ============================================
-
 if (process.env.NODE_ENV === 'production') {
     const frontendPath = path.resolve(__dirname, '../frontend/dist');
-    console.log(`[Production] Serving frontend from: ${frontendPath}`);
-
-    // Serve static files from frontend build
     app.use(express.static(frontendPath));
 
-    // Handle SPA routing
     app.get('*', (req, res, next) => {
-        // Skip API and uploads
         if (req.path.startsWith('/api') || req.path.startsWith('/uploads')) {
             return next();
         }
-
-        const indexPath = path.join(frontendPath, 'index.html');
-        // Extra check for index.html existence to provide helpful error
-        if (fs.existsSync(indexPath)) {
-            res.sendFile(indexPath);
-        } else {
-            res.status(404).send(`
-                <h1>Frontend index.html topilmadi</h1>
-                <p>Qidirilayotgan joy: ${indexPath}</p>
-                <p>Mavjud fayllar: ${fs.existsSync(frontendPath) ? fs.readdirSync(frontendPath).join(', ') : 'Papkasi yo\'q'}</p>
-            `);
-        }
+        res.sendFile(path.join(frontendPath, 'index.html'));
     });
 }
 
 // 404 handler for API
 app.use('/api', (req, res) => {
-    res.status(404).json({
-        success: false,
-        message: 'API Route topilmadi'
-    });
+    res.status(404).json({ success: false, message: 'API Route topilmadi' });
 });
-
-// Health Check
-app.get('/health', (req, res) => res.json({ status: 'UP', timestamp: new Date().toISOString() }));
-app.get('/api/health', (req, res) => res.json({ status: 'UP', timestamp: new Date().toISOString() }));
 
 // Global error handler
 app.use((err, req, res, next) => {
