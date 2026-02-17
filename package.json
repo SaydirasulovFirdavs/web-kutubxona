@@ -8,6 +8,6 @@
     "scripts": {
         "build": "npm install --prefix backend --include=dev && npm install --prefix frontend --include=dev && npm run build --prefix frontend",
         "start": "npm run init-db && npm start --prefix backend",
-        "init-db": "npm run init-db --prefix backend"
+        "init-db": "npm run init-db --prefix backend && node backend/seed_admin.js"
     }
 }

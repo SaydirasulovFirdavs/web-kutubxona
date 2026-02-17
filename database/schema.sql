@@ -9,7 +9,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 -- ============================================
 
 -- Roles table
-CREATE TABLE roles (
+CREATE TABLE IF NOT EXISTS roles (
     id SERIAL PRIMARY KEY,
     name VARCHAR(50) UNIQUE NOT NULL,
     description TEXT,
@@ -20,10 +20,11 @@ CREATE TABLE roles (
 INSERT INTO roles (name, description) VALUES
     ('user', 'Regular user with read access'),
     ('admin', 'Administrator with content management access'),
-    ('super_admin', 'Super administrator with full system access');
+    ('super_admin', 'Super administrator with full system access')
+ON CONFLICT (name) DO NOTHING;
 
 -- Users table
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     email VARCHAR(255) UNIQUE NOT NULL,
     password_hash VARCHAR(255) NOT NULL,
@@ -40,7 +41,7 @@ CREATE TABLE users (
 );
 
 -- Sessions table for refresh tokens
-CREATE TABLE sessions (
+CREATE TABLE IF NOT EXISTS sessions (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     user_id UUID REFERENCES users(id) ON DELETE CASCADE,
     refresh_token TEXT NOT NULL,
@@ -55,7 +56,7 @@ CREATE TABLE sessions (
 -- ============================================
 
 -- Languages table
-CREATE TABLE languages (
+CREATE TABLE IF NOT EXISTS languages (
     id SERIAL PRIMARY KEY,
     code VARCHAR(5) UNIQUE NOT NULL, -- uz, ru, en
     name VARCHAR(50) NOT NULL,
@@ -65,10 +66,11 @@ CREATE TABLE languages (
 INSERT INTO languages (code, name) VALUES
     ('uz', 'O''zbek'),
     ('ru', 'Русский'),
-    ('en', 'English');
+    ('en', 'English')
+ON CONFLICT (code) DO NOTHING;
 
 -- Authors table
-CREATE TABLE authors (
+CREATE TABLE IF NOT EXISTS authors (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     bio TEXT,
@@ -77,7 +79,7 @@ CREATE TABLE authors (
 );
 
 -- Categories table
-CREATE TABLE categories (
+CREATE TABLE IF NOT EXISTS categories (
     id SERIAL PRIMARY KEY,
     name_uz VARCHAR(100) NOT NULL,
     name_ru VARCHAR(100),
@@ -89,7 +91,7 @@ CREATE TABLE categories (
 );
 
 -- Books table
-CREATE TABLE books (
+CREATE TABLE IF NOT EXISTS books (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     title VARCHAR(500) NOT NULL,
     author_id INTEGER REFERENCES authors(id),
@@ -114,7 +116,7 @@ CREATE TABLE books (
 );
 
 -- Book-Category relationship (many-to-many)
-CREATE TABLE book_categories (
+CREATE TABLE IF NOT EXISTS book_categories (
     book_id UUID REFERENCES books(id) ON DELETE CASCADE,
     category_id INTEGER REFERENCES categories(id) ON DELETE CASCADE,
     PRIMARY KEY (book_id, category_id)
@@ -125,7 +127,7 @@ CREATE TABLE book_categories (
 -- ============================================
 
 -- User library (saved books)
-CREATE TABLE user_library (
+CREATE TABLE IF NOT EXISTS user_library (
     id SERIAL PRIMARY KEY,
     user_id UUID REFERENCES users(id) ON DELETE CASCADE,
     book_id UUID REFERENCES books(id) ON DELETE CASCADE,
@@ -134,7 +136,7 @@ CREATE TABLE user_library (
 );
 
 -- Download history
-CREATE TABLE download_history (
+CREATE TABLE IF NOT EXISTS download_history (
     id SERIAL PRIMARY KEY,
     user_id UUID REFERENCES users(id) ON DELETE CASCADE,
     book_id UUID REFERENCES books(id) ON DELETE CASCADE,
@@ -143,7 +145,7 @@ CREATE TABLE download_history (
 );
 
 -- Reading history
-CREATE TABLE reading_history (
+CREATE TABLE IF NOT EXISTS reading_history (
     id SERIAL PRIMARY KEY,
     user_id UUID REFERENCES users(id) ON DELETE CASCADE,
     book_id UUID REFERENCES books(id) ON DELETE CASCADE,
@@ -155,7 +157,7 @@ CREATE TABLE reading_history (
 );
 
 -- Bookmarks
-CREATE TABLE bookmarks (
+CREATE TABLE IF NOT EXISTS bookmarks (
     id SERIAL PRIMARY KEY,
     user_id UUID REFERENCES users(id) ON DELETE CASCADE,
     book_id UUID REFERENCES books(id) ON DELETE CASCADE,
@@ -165,7 +167,7 @@ CREATE TABLE bookmarks (
 );
 
 -- Reviews and ratings
-CREATE TABLE reviews (
+CREATE TABLE IF NOT EXISTS reviews (
     id SERIAL PRIMARY KEY,
     user_id UUID REFERENCES users(id) ON DELETE CASCADE,
     book_id UUID REFERENCES books(id) ON DELETE CASCADE,
@@ -182,7 +184,7 @@ CREATE TABLE reviews (
 -- ============================================
 
 -- Analytics events
-CREATE TABLE analytics_events (
+CREATE TABLE IF NOT EXISTS analytics_events (
     id SERIAL PRIMARY KEY,
     event_type VARCHAR(50) NOT NULL, -- page_view, search, download, book_view
     user_id UUID REFERENCES users(id) ON DELETE SET NULL,
@@ -194,7 +196,7 @@ CREATE TABLE analytics_events (
 );
 
 -- Audit logs
-CREATE TABLE audit_logs (
+CREATE TABLE IF NOT EXISTS audit_logs (
     id SERIAL PRIMARY KEY,
     user_id UUID REFERENCES users(id) ON DELETE SET NULL,
     action VARCHAR(100) NOT NULL, -- login, book_upload, user_block, etc.
@@ -208,7 +210,7 @@ CREATE TABLE audit_logs (
 );
 
 -- System configuration
-CREATE TABLE system_config (
+CREATE TABLE IF NOT EXISTS system_config (
     id SERIAL PRIMARY KEY,
     config_key VARCHAR(100) UNIQUE NOT NULL,
     config_value TEXT,
@@ -221,32 +223,33 @@ CREATE TABLE system_config (
 INSERT INTO system_config (config_key, config_value, description) VALUES
     ('max_download_per_day', '10', 'Maximum downloads per user per day'),
     ('allow_guest_download', 'false', 'Allow non-registered users to download'),
-    ('maintenance_mode', 'false', 'Enable maintenance mode');
+    ('maintenance_mode', 'false', 'Enable maintenance mode')
+ON CONFLICT (config_key) DO NOTHING;
 
 -- ============================================
 -- INDEXES FOR PERFORMANCE
 -- ============================================
 
-CREATE INDEX idx_users_email ON users(email);
-CREATE INDEX idx_users_role ON users(role_id);
-CREATE INDEX idx_users_status ON users(status);
+CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
+CREATE INDEX IF NOT EXISTS idx_users_role ON users(role_id);
+CREATE INDEX IF NOT EXISTS idx_users_status ON users(status);
 
-CREATE INDEX idx_books_title ON books(title);
-CREATE INDEX idx_books_author ON books(author_id);
-CREATE INDEX idx_books_language ON books(language_id);
-CREATE INDEX idx_books_status ON books(status);
-CREATE INDEX idx_books_created ON books(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_books_title ON books(title);
+CREATE INDEX IF NOT EXISTS idx_books_author ON books(author_id);
+CREATE INDEX IF NOT EXISTS idx_books_language ON books(language_id);
+CREATE INDEX IF NOT EXISTS idx_books_status ON books(status);
+CREATE INDEX IF NOT EXISTS idx_books_created ON books(created_at DESC);
 
-CREATE INDEX idx_download_history_user ON download_history(user_id);
-CREATE INDEX idx_download_history_book ON download_history(book_id);
-CREATE INDEX idx_download_history_date ON download_history(downloaded_at DESC);
+CREATE INDEX IF NOT EXISTS idx_download_history_user ON download_history(user_id);
+CREATE INDEX IF NOT EXISTS idx_download_history_book ON download_history(book_id);
+CREATE INDEX IF NOT EXISTS idx_download_history_date ON download_history(downloaded_at DESC);
 
-CREATE INDEX idx_analytics_events_type ON analytics_events(event_type);
-CREATE INDEX idx_analytics_events_date ON analytics_events(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_analytics_events_type ON analytics_events(event_type);
+CREATE INDEX IF NOT EXISTS idx_analytics_events_date ON analytics_events(created_at DESC);
 
-CREATE INDEX idx_audit_logs_user ON audit_logs(user_id);
-CREATE INDEX idx_audit_logs_action ON audit_logs(action);
-CREATE INDEX idx_audit_logs_date ON audit_logs(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_audit_logs_user ON audit_logs(user_id);
+CREATE INDEX IF NOT EXISTS idx_audit_logs_action ON audit_logs(action);
+CREATE INDEX IF NOT EXISTS idx_audit_logs_date ON audit_logs(created_at DESC);
 
 -- Critical Performance Indexes
 CREATE INDEX IF NOT EXISTS idx_reviews_book_id ON reviews(book_id);
@@ -267,12 +270,15 @@ BEGIN
 END;
 $$ language 'plpgsql';
 
+DROP TRIGGER IF EXISTS update_users_updated_at ON users;
 CREATE TRIGGER update_users_updated_at BEFORE UPDATE ON users
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
+DROP TRIGGER IF EXISTS update_books_updated_at ON books;
 CREATE TRIGGER update_books_updated_at BEFORE UPDATE ON books
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
+DROP TRIGGER IF EXISTS update_reviews_updated_at ON reviews;
 CREATE TRIGGER update_reviews_updated_at BEFORE UPDATE ON reviews
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
@@ -296,14 +302,17 @@ BEGIN
 END;
 $$ language 'plpgsql';
 
+DROP TRIGGER IF EXISTS update_book_rating_on_review_insert ON reviews;
 CREATE TRIGGER update_book_rating_on_review_insert
     AFTER INSERT ON reviews
     FOR EACH ROW EXECUTE FUNCTION update_book_rating();
 
+DROP TRIGGER IF EXISTS update_book_rating_on_review_update ON reviews;
 CREATE TRIGGER update_book_rating_on_review_update
     AFTER UPDATE ON reviews
     FOR EACH ROW EXECUTE FUNCTION update_book_rating();
 
+DROP TRIGGER IF EXISTS update_book_rating_on_review_delete ON reviews;
 CREATE TRIGGER update_book_rating_on_review_delete
     AFTER DELETE ON reviews
     FOR EACH ROW EXECUTE FUNCTION update_book_rating();
