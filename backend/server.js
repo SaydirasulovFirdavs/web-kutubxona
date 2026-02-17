@@ -143,10 +143,18 @@ if (process.env.NODE_ENV === 'production') {
 
     if (fs.existsSync(frontendPath)) {
         console.log('✅ Frontend dist directory found');
+        const files = fs.readdirSync(frontendPath);
+        console.log('Static files in dist:', files);
+
+        const indexPath = path.join(frontendPath, 'index.html');
+        if (fs.existsSync(indexPath)) {
+            const indexContent = fs.readFileSync(indexPath, 'utf8');
+            console.log('Index.html snippet:', indexContent.substring(0, 300));
+        } else {
+            console.error('❌ index.html NOT found in dist!');
+        }
     } else {
-        console.error('❌ Frontend dist directory NOT found! Build might have failed or path is wrong.');
-        console.log('Current __dirname:', __dirname);
-        console.log('Static files in parent:', fs.readdirSync(path.join(__dirname, '..')));
+        console.error('❌ Frontend dist directory NOT found!');
     }
 
     // Serve static files from frontend build
