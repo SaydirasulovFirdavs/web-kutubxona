@@ -17,9 +17,9 @@ import {
  * Register new user
  */
 export const register = async (req, res) => {
-    const client = await getClient();
-
+    let client;
     try {
+        client = await getClient();
         const { email, password, fullName } = req.body;
 
         // Validate input
@@ -147,9 +147,9 @@ export const verifyEmail = async (req, res) => {
  * Login
  */
 export const login = async (req, res) => {
-    const client = await getClient();
-
+    let client;
     try {
+        client = await getClient();
         const { email, password } = req.body;
 
         if (!email || !password) {
