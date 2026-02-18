@@ -87,6 +87,21 @@ app.use('/uploads', express.static(uploadDir));
 app.get('/health', (req, res) => res.json({ status: 'UP', timestamp: new Date().toISOString() }));
 app.get('/api/health', (req, res) => res.json({ status: 'UP', timestamp: new Date().toISOString() }));
 
+// Debug Log Endpoint (Temporary for Railway Troubleshooting)
+app.get('/api/debug/server-logs', (req, res) => {
+    try {
+        const logPath = path.join(__dirname, 'debug_log.txt');
+        if (fs.existsSync(logPath)) {
+            const logs = fs.readFileSync(logPath, 'utf8');
+            res.header('Content-Type', 'text/plain').send(logs);
+        } else {
+            res.send('No debug log file found.');
+        }
+    } catch (e) {
+        res.status(500).send('Error reading logs: ' + e.message);
+    }
+});
+
 // Rate limiting
 const limiter = rateLimit({
     windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS) || 15 * 60 * 1000,
@@ -108,20 +123,12 @@ app.use('/api/user', userRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/stats', statsRoutes);
 
-// Debug Log Endpoint (Temporary for Railway Troubleshooting)
-app.get('/api/debug/server-logs', (req, res) => {
-    try {
-        const logPath = path.join(__dirname, 'debug_log.txt');
-        if (fs.existsSync(logPath)) {
-            const logs = fs.readFileSync(logPath, 'utf8');
-            res.header('Content-Type', 'text/plain').send(logs);
-        } else {
-            res.send('No debug log file found.');
-        }
-    } catch (e) {
-        res.status(500).send('Error reading logs: ' + e.message);
-    }
+app.get('/api/stats', (req, res, next) => {
+    console.log('!!! DEBUG: REACHED STATS ROUTE');
+    next();
 });
+
+// REMOVED DUPLICATE DEBUG ROUTE FROM HERE
 
 // ============================================
 // FRONTEND SERVING (Production)
