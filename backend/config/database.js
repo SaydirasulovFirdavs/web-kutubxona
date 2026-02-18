@@ -7,7 +7,7 @@ dotenv.config();
 const { Pool } = pg;
 
 // Flag to force mock DB
-const USE_MOCK_DB = true; // TEMPORARY FOR STABILITY
+const USE_MOCK_DB = false; // FINALLY BACK TO REAL DB
 let isMock = USE_MOCK_DB;
 let pool;
 
@@ -157,6 +157,21 @@ const handleMockQuery = (text, params) => {
     // 8. Get Languages
     if (query.includes('SELECT * FROM LANGUAGES')) {
         return { rows: mockData.languages };
+    }
+
+    // 9. Get User (Login/Auth)
+    if (query.includes('FROM USERS U') && query.includes('WHERE U.EMAIL = $1')) {
+        return {
+            rows: [{
+                id: 1,
+                email: params[0],
+                password_hash: '$2a$10$YourMockHashHere', // password: admin123 (if mocked)
+                full_name: 'Mock Admin',
+                status: 'active',
+                email_verified: true,
+                role: 'admin'
+            }]
+        };
     }
 
     console.warn('⚠️  Unmocked query:', text);
