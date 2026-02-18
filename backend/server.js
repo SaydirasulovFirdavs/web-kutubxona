@@ -129,6 +129,12 @@ const limiter = rateLimit({
 // ROUTES
 // ============================================
 
+app.use('/api/auth', (req, res, next) => {
+    const logMsg = `[${new Date().toISOString()}] 🔍 DEBUG: Just before Auth Router: ${req.method} ${req.url}\n`;
+    console.log(logMsg);
+    try { fs.appendFileSync(path.join(__dirname, 'debug_log.txt'), logMsg); } catch (e) { }
+    next();
+});
 app.use('/api/auth', authRoutes);
 app.use('/api/books', booksRoutes);
 app.use('/api/user', userRoutes);
