@@ -150,11 +150,13 @@ console.log('🔍 DEBUG: auth.controller.js module is being loaded');
  */
 export const login = async (req, res) => {
     console.log('🔍 DEBUG: Reached login function in controller');
-    return res.json({ success: true, message: 'DEBUG OK' });
+    // return res.json({ success: true, message: 'DEBUG OK' });
     const client = await getClient();
+    console.log('🔍 DEBUG: Got DB client');
 
     try {
         const { email, password } = req.body;
+        console.log(`🔍 DEBUG: Login attempt for: ${email}`);
 
         if (!email || !password) {
             return res.status(400).json({
@@ -176,6 +178,8 @@ export const login = async (req, res) => {
         );
         const dbDuration = Date.now() - dbStartTime;
         console.log(`🔍 DEBUG: DB query finished in ${dbDuration}ms for user: ${email}`);
+
+        return res.json({ success: true, message: `DB OK, found ${result.rows.length} users` });
 
         if (result.rows.length === 0) {
             console.log(`🔍 Login attempt failed: User not found [${email}]`);
