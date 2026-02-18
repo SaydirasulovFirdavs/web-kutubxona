@@ -189,7 +189,12 @@ export const getClient = async () => {
         };
     }
 
+    console.log('🔍 DEBUG: Attempting to connect to pool...');
+    const connStart = Date.now();
     const client = await pool.connect();
+    const connDuration = Date.now() - connStart;
+    console.log(`🔍 DEBUG: Connected to pool in ${connDuration}ms`);
+
     const query = client.query.bind(client);
     const release = client.release.bind(client);
 
