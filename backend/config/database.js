@@ -20,7 +20,8 @@ const logToFile = (msg) => {
     const formattedMsg = `[${timestamp}] ${msg}\n`;
     console.log(formattedMsg);
     try {
-        fs.appendFileSync(path.join(__dirname, 'debug_log.txt'), formattedMsg);
+        const logPath = path.join(__dirname, '..', 'debug_log.txt');
+        fs.appendFileSync(logPath, formattedMsg);
     } catch (e) { }
 };
 
