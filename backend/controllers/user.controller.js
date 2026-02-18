@@ -1,5 +1,5 @@
 import { query } from '../config/database.js';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 /**
  * Get user profile

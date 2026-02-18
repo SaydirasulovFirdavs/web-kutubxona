@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 import { query } from './config/database.js';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 const createAdmin = async () => {
     try {
