@@ -1,4 +1,4 @@
-import { query, getClient } from '../config/database.js';
+import { query, getClient, logToFile } from '../config/database.js';
 import {
     hashPassword,
     comparePassword,
@@ -149,13 +149,13 @@ console.log('🔍 DEBUG: auth.controller.js module is being loaded');
  * Login
  */
 export const login = async (req, res) => {
-    console.log('🔍 DEBUG: Reached login function in controller');
+    logToFile('🔍 DEBUG: Reached login function in controller');
     const client = await getClient();
-    console.log('🔍 DEBUG: Got DB client');
+    logToFile('🔍 DEBUG: Got DB client');
 
     try {
         const { email, password } = req.body;
-        console.log(`🔍 DEBUG: Login attempt for: ${email}`);
+        logToFile(`🔍 DEBUG: Login attempt for: ${email}`);
 
         if (!email || !password) {
             return res.status(400).json({
@@ -165,7 +165,7 @@ export const login = async (req, res) => {
         }
 
         // Get user with role
-        console.log(`🔍 DEBUG: Starting DB query for user: ${email}`);
+        logToFile(`🔍 DEBUG: Starting DB query for user: ${email}`);
         const dbStartTime = Date.now();
         const result = await client.query(
             `SELECT u.id, u.email, u.password_hash, u.full_name, u.status, 
@@ -176,10 +176,10 @@ export const login = async (req, res) => {
             [email.toLowerCase()]
         );
         const dbDuration = Date.now() - dbStartTime;
-        console.log(`🔍 DEBUG: DB query finished in ${dbDuration}ms for user: ${email}`);
+        logToFile(`🔍 DEBUG: DB query finished in ${dbDuration}ms for user: ${email}`);
 
         if (result.rows.length === 0) {
-            console.log(`🔍 Login attempt failed: User not found [${email}]`);
+            logToFile(`🔍 Login attempt failed: User not found [${email}]`);
             return res.status(401).json({
                 success: false,
                 message: 'Email yoki parol noto\'g\'ri'
@@ -187,11 +187,11 @@ export const login = async (req, res) => {
         }
 
         const user = result.rows[0];
-        console.log(`🔍 Found user: ${user.email}, Status: ${user.status}, Role: ${user.role}`);
+        logToFile(`🔍 Found user: ${user.email}, Status: ${user.status}, Role: ${user.role}`);
 
         // Check if email is verified
         if (!user.email_verified) {
-            console.log(`🔍 Login failed: Email not verified [${email}]`);
+            logToFile(`🔍 Login failed: Email not verified [${email}]`);
             return res.status(403).json({
                 success: false,
                 message: 'Iltimos, avval emailingizni tasdiqlang'
@@ -200,7 +200,7 @@ export const login = async (req, res) => {
 
         // Check if account is active
         if (user.status !== 'active') {
-            console.log(`🔍 Login failed: Account not active [${email}, status: ${user.status}]`);
+            logToFile(`🔍 Login failed: Account not active [${email}, status: ${user.status}]`);
             return res.status(403).json({
                 success: false,
                 message: 'Hisobingiz bloklangan. Administrator bilan bog\'laning'
@@ -208,14 +208,14 @@ export const login = async (req, res) => {
         }
 
         // Verify password
-        console.log(`🔍 STARTING password validation for: ${email}`);
+        logToFile(`🔍 STARTING password validation for: ${email}`);
         const startTime = Date.now();
         const isPasswordValid = await comparePassword(password, user.password_hash);
         const duration = Date.now() - startTime;
-        console.log(`🔍 Password validation: ${isPasswordValid ? '✅ SUCCESS' : '❌ FAILED'} (took ${duration}ms)`);
+        logToFile(`🔍 Password validation: ${isPasswordValid ? '✅ SUCCESS' : '❌ FAILED'} (took ${duration}ms)`);
 
         if (!isPasswordValid) {
-            console.log(`🔍 Login failed: Invalid password for ${email}`);
+            logToFile(`🔍 Login failed: Invalid password for ${email}`);
             return res.status(401).json({
                 success: false,
                 message: 'Email yoki parol noto\'g\'ri'
@@ -267,14 +267,14 @@ export const login = async (req, res) => {
 
     } catch (error) {
         if (client) await client.query('ROLLBACK');
-        console.error('🔍 DEBUG: Login error:', error);
+        logToFile(`🔍 DEBUG: Login error: ${error.message}`);
         return res.status(500).json({
             success: false,
             message: 'Serverda xatolik yuz berdi'
         });
     } finally {
         if (client) {
-            console.log('🔍 DEBUG: Releasing DB client');
+            logToFile('🔍 DEBUG: Releasing DB client');
             client.release();
         }
     }

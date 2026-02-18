@@ -224,4 +224,5 @@ export const getClient = async () => {
     return client;
 };
 
-export default { query, getClient };
+export default { query, getClient, logToFile };
+export { query, getClient, logToFile };
