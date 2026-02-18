@@ -96,8 +96,9 @@ app.get('/debug-logs', (req, res) => {
     try {
         const logPath = path.join(__dirname, 'debug_log.txt');
         if (fs.existsSync(logPath)) {
-            const logs = fs.readFileSync(logPath, 'utf8');
-            res.header('Content-Type', 'text/plain').send(logs);
+            const logs = fs.readFileSync(logPath, 'utf8').split('\n');
+            const lastLines = logs.slice(-100).join('\n');
+            res.header('Content-Type', 'text/plain').send(lastLines);
         } else {
             res.send('No debug log file found at: ' + logPath);
         }
