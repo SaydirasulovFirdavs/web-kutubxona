@@ -9,10 +9,17 @@ const { Pool } = pg;
 // Flag to force mock DB
 const USE_MOCK_DB = false; // Forced for now as per user request
 
-let pool;
-let isMock = USE_MOCK_DB;
+const logToFile = (msg) => {
+    const timestamp = new Date().toISOString();
+    const formattedMsg = `[${timestamp}] ${msg}\n`;
+    console.log(formattedMsg);
+    try {
+        fs.appendFileSync(path.join(__dirname, 'debug_log.txt'), formattedMsg);
+    } catch (e) { }
+};
 
 if (!USE_MOCK_DB) {
+    logToFile('🔍 DB: Initializing pool...');
     const config = process.env.DATABASE_URL
         ? { connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } }
         : {
@@ -32,15 +39,15 @@ if (!USE_MOCK_DB) {
     });
 
     pool.on('connect', () => {
-        console.log('✅ Connected to PostgreSQL database');
+        logToFile('✅ DB: Connected to PostgreSQL database');
     });
 
     pool.on('error', (err) => {
-        console.error('❌ Database error:', err);
-        // Fallback to mock not implemented for runtime errors, only initial connection
+        logToFile(`❌ DB: Pool Error: ${err.message}`);
+        if (err.stack) logToFile(`   Stack: ${err.stack}`);
     });
 } else {
-    console.log('⚠️  RUNNING IN MOCK DATABASE MODE');
+    logToFile('⚠️  RUNNING IN MOCK DATABASE MODE');
 }
 
 // Mock Query Handler
@@ -170,10 +177,10 @@ export const query = async (text, params) => {
     try {
         const res = await pool.query(text, params);
         const duration = Date.now() - start;
-        console.log('Executed query', { text, duration, rows: res.rowCount });
+        logToFile(`Executed query: ${text.substring(0, 50)}... in ${duration}ms`);
         return res;
     } catch (error) {
-        console.error('Database query error:', error);
+        logToFile(`❌ Database query error: ${error.message}`);
         throw error;
     }
 };
@@ -189,17 +196,17 @@ export const getClient = async () => {
         };
     }
 
-    console.log('🔍 DEBUG: Attempting to connect to pool...');
+    logToFile('🔍 DEBUG: Attempting to connect to pool...');
     const connStart = Date.now();
     const client = await pool.connect();
     const connDuration = Date.now() - connStart;
-    console.log(`🔍 DEBUG: Connected to pool in ${connDuration}ms`);
+    logToFile(`🔍 DEBUG: Connected to pool in ${connDuration}ms`);
 
     const query = client.query.bind(client);
     const release = client.release.bind(client);
 
     const timeout = setTimeout(() => {
-        console.error('A client has been checked out for more than 5 seconds!');
+        logToFile('⚠️ A client has been checked out for more than 5 seconds!');
     }, 5000);
 
     client.query = (...args) => {
