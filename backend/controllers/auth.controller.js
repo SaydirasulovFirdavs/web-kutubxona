@@ -199,10 +199,14 @@ export const login = async (req, res) => {
         }
 
         // Verify password
+        console.log(`🔍 STARTING password validation for: ${email}`);
+        const startTime = Date.now();
         const isPasswordValid = await comparePassword(password, user.password_hash);
-        console.log(`🔍 Password validation: ${isPasswordValid ? '✅ SUCCESS' : '❌ FAILED'}`);
+        const duration = Date.now() - startTime;
+        console.log(`🔍 Password validation: ${isPasswordValid ? '✅ SUCCESS' : '❌ FAILED'} (took ${duration}ms)`);
 
         if (!isPasswordValid) {
+            console.log(`🔍 Login failed: Invalid password for ${email}`);
             return res.status(401).json({
                 success: false,
                 message: 'Email yoki parol noto\'g\'ri'
