@@ -47,15 +47,8 @@ const PORT = process.env.PORT || 5000;
 // MIDDLEWARE
 // ============================================
 
-// Simple request logger
-app.use((req, res, next) => {
-    const logBatch = `[${new Date().toISOString()}] ${req.method} ${req.url} - PROXIES: ${req.ips.join(',')} - IP: ${req.ip}\n`;
-    console.log(logBatch);
-    try {
-        fs.appendFileSync(path.join(__dirname, 'debug_log.txt'), logBatch);
-    } catch (e) { }
-    next();
-});
+// Rate limiter
+// app.use('/api/', limiter); // User can re-enable later if needed, keeping it disabled for now as requested
 
 // Security headers - Customize for PDF loading and previews
 app.use(helmet({
@@ -92,27 +85,7 @@ app.get('/health', (req, res) => res.json({ status: 'UP', timestamp: new Date().
 app.get('/api/health', (req, res) => res.json({ status: 'UP', timestamp: new Date().toISOString() }));
 
 // Debug Log Endpoint (Root Level to bypass /api handlers)
-app.get('/debug-logs', (req, res) => {
-    try {
-        const logPath = path.join(__dirname, 'debug_log.txt');
-
-        // Clear logs if requested
-        if (req.query.clear === 'true') {
-            fs.writeFileSync(logPath, `--- LOGS CLEARED AT ${new Date().toISOString()} ---\n`);
-            return res.send('Logs cleared.');
-        }
-
-        if (fs.existsSync(logPath)) {
-            const logs = fs.readFileSync(logPath, 'utf8').split('\n');
-            const lastLines = logs.slice(-500).join('\n');
-            res.header('Content-Type', 'text/plain').send(lastLines);
-        } else {
-            res.send('No debug log file found at: ' + logPath);
-        }
-    } catch (e) {
-        res.status(500).send('Error reading logs: ' + e.message);
-    }
-});
+// Removed for cleanliness
 
 // Rate limiting
 const limiter = rateLimit({

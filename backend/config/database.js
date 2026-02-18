@@ -7,13 +7,9 @@ dotenv.config();
 const { Pool } = pg;
 
 // Flag to force mock DB
-const USE_MOCK_DB = false; // FINALLY BACK TO REAL DB
+const USE_MOCK_DB = false;
 let isMock = USE_MOCK_DB;
 let pool;
-
-const logToFile = (msg) => {
-    console.log(`[DB-LOG] ${msg}`);
-};
 
 if (!USE_MOCK_DB) {
     logToFile('🔍 DB: Initializing pool...');

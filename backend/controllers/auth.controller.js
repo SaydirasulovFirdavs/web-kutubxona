@@ -1,4 +1,4 @@
-import { query, getClient, logToFile } from '../config/database.js';
+import { query, getClient } from '../config/database.js';
 import {
     hashPassword,
     comparePassword,
@@ -84,14 +84,14 @@ export const register = async (req, res) => {
         });
 
     } catch (error) {
-        await client.query('ROLLBACK');
+        if (client) await client.query('ROLLBACK');
         console.error('Registration error:', error);
         res.status(500).json({
             success: false,
             message: 'Ro\'yxatdan o\'tishda xatolik yuz berdi'
         });
     } finally {
-        client.release();
+        if (client) client.release();
     }
 };
 
@@ -143,19 +143,14 @@ export const verifyEmail = async (req, res) => {
     }
 };
 
-console.log('🔍 DEBUG: auth.controller.js module is being loaded');
-
 /**
  * Login
  */
 export const login = async (req, res) => {
-    logToFile('🔍 DEBUG: Reached login function in controller');
     const client = await getClient();
-    logToFile('🔍 DEBUG: Got DB client');
 
     try {
         const { email, password } = req.body;
-        logToFile(`🔍 DEBUG: Login attempt for: ${email}`);
 
         if (!email || !password) {
             return res.status(400).json({
@@ -165,8 +160,6 @@ export const login = async (req, res) => {
         }
 
         // Get user with role
-        logToFile(`🔍 DEBUG: Starting DB query for user: ${email}`);
-        const dbStartTime = Date.now();
         const result = await client.query(
             `SELECT u.id, u.email, u.password_hash, u.full_name, u.status, 
                     u.email_verified, r.name as role
@@ -175,11 +168,8 @@ export const login = async (req, res) => {
              WHERE u.email = $1`,
             [email.toLowerCase()]
         );
-        const dbDuration = Date.now() - dbStartTime;
-        logToFile(`🔍 DEBUG: DB query finished in ${dbDuration}ms for user: ${email}`);
 
         if (result.rows.length === 0) {
-            logToFile(`🔍 Login attempt failed: User not found [${email}]`);
             return res.status(401).json({
                 success: false,
                 message: 'Email yoki parol noto\'g\'ri'
@@ -187,11 +177,9 @@ export const login = async (req, res) => {
         }
 
         const user = result.rows[0];
-        logToFile(`🔍 Found user: ${user.email}, Status: ${user.status}, Role: ${user.role}`);
 
         // Check if email is verified
         if (!user.email_verified) {
-            logToFile(`🔍 Login failed: Email not verified [${email}]`);
             return res.status(403).json({
                 success: false,
                 message: 'Iltimos, avval emailingizni tasdiqlang'
@@ -200,7 +188,6 @@ export const login = async (req, res) => {
 
         // Check if account is active
         if (user.status !== 'active') {
-            logToFile(`🔍 Login failed: Account not active [${email}, status: ${user.status}]`);
             return res.status(403).json({
                 success: false,
                 message: 'Hisobingiz bloklangan. Administrator bilan bog\'laning'
@@ -208,14 +195,9 @@ export const login = async (req, res) => {
         }
 
         // Verify password
-        logToFile(`🔍 STARTING password validation for: ${email}`);
-        const startTime = Date.now();
         const isPasswordValid = await comparePassword(password, user.password_hash);
-        const duration = Date.now() - startTime;
-        logToFile(`🔍 Password validation: ${isPasswordValid ? '✅ SUCCESS' : '❌ FAILED'} (took ${duration}ms)`);
 
         if (!isPasswordValid) {
-            logToFile(`🔍 Login failed: Invalid password for ${email}`);
             return res.status(401).json({
                 success: false,
                 message: 'Email yoki parol noto\'g\'ri'
@@ -267,16 +249,13 @@ export const login = async (req, res) => {
 
     } catch (error) {
         if (client) await client.query('ROLLBACK');
-        logToFile(`🔍 DEBUG: Login error: ${error.message}`);
+        console.error('Login error:', error);
         return res.status(500).json({
             success: false,
             message: 'Serverda xatolik yuz berdi'
         });
     } finally {
-        if (client) {
-            logToFile('🔍 DEBUG: Releasing DB client');
-            client.release();
-        }
+        if (client) client.release();
     }
 };
 
