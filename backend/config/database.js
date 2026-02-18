@@ -13,7 +13,7 @@ const __dirname = path.dirname(__filename);
 const { Pool } = pg;
 
 // Flag to force mock DB
-const USE_MOCK_DB = false; // Forced for now as per user request
+const USE_MOCK_DB = true; // TEMPORARY FOR DIAGNOSTICS
 
 const logToFile = (msg) => {
     const timestamp = new Date().toISOString();
