@@ -17,12 +17,7 @@ const USE_MOCK_DB = true; // TEMPORARY FOR DIAGNOSTICS
 
 const logToFile = (msg) => {
     const timestamp = new Date().toISOString();
-    const formattedMsg = `[${timestamp}] ${msg}\n`;
-    console.log(formattedMsg);
-    try {
-        const logPath = path.join(__dirname, '..', 'debug_log.txt');
-        fs.appendFileSync(logPath, formattedMsg);
-    } catch (e) { }
+    console.log(`[${timestamp}] ${msg}`);
 };
 
 if (!USE_MOCK_DB) {
