@@ -143,10 +143,14 @@ export const verifyEmail = async (req, res) => {
     }
 };
 
+console.log('🔍 DEBUG: auth.controller.js module is being loaded');
+
 /**
  * Login
  */
 export const login = async (req, res) => {
+    console.log('🔍 DEBUG: Reached login function in controller');
+    return res.json({ success: true, message: 'DEBUG OK' });
     const client = await getClient();
 
     try {
