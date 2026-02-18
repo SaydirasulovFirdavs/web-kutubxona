@@ -150,7 +150,6 @@ console.log('🔍 DEBUG: auth.controller.js module is being loaded');
  */
 export const login = async (req, res) => {
     console.log('🔍 DEBUG: Reached login function in controller');
-    // return res.json({ success: true, message: 'DEBUG OK' });
     const client = await getClient();
     console.log('🔍 DEBUG: Got DB client');
 
@@ -168,7 +167,7 @@ export const login = async (req, res) => {
         // Get user with role
         console.log(`🔍 DEBUG: Starting DB query for user: ${email}`);
         const dbStartTime = Date.now();
-        const result = await query(
+        const result = await client.query(
             `SELECT u.id, u.email, u.password_hash, u.full_name, u.status, 
                     u.email_verified, r.name as role
              FROM users u
@@ -178,8 +177,6 @@ export const login = async (req, res) => {
         );
         const dbDuration = Date.now() - dbStartTime;
         console.log(`🔍 DEBUG: DB query finished in ${dbDuration}ms for user: ${email}`);
-
-        return res.json({ success: true, message: `DB OK, found ${result.rows.length} users` });
 
         if (result.rows.length === 0) {
             console.log(`🔍 Login attempt failed: User not found [${email}]`);
@@ -256,30 +253,30 @@ export const login = async (req, res) => {
 
         await client.query('COMMIT');
 
-        res.json({
+        return res.json({
             success: true,
-            message: 'Muvaffaqiyatli kirdingiz',
-            data: {
-                user: {
-                    id: user.id,
-                    email: user.email,
-                    fullName: user.full_name,
-                    role: user.role
-                },
-                accessToken,
-                refreshToken
+            accessToken,
+            refreshToken,
+            user: {
+                id: user.id,
+                email: user.email,
+                fullName: user.full_name,
+                role: user.role
             }
         });
 
     } catch (error) {
-        await client.query('ROLLBACK');
-        console.error('Login error:', error);
-        res.status(500).json({
+        if (client) await client.query('ROLLBACK');
+        console.error('🔍 DEBUG: Login error:', error);
+        return res.status(500).json({
             success: false,
-            message: 'Kirishda xatolik yuz berdi'
+            message: 'Serverda xatolik yuz berdi'
         });
     } finally {
-        client.release();
+        if (client) {
+            console.log('🔍 DEBUG: Releasing DB client');
+            client.release();
+        }
     }
 };
 
