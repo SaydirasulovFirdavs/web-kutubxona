@@ -105,18 +105,6 @@ app.get('/debug-logs', (req, res) => {
         res.status(500).send('Error reading logs: ' + e.message);
     }
 });
-try {
-    const logPath = path.join(__dirname, 'debug_log.txt');
-    if (fs.existsSync(logPath)) {
-        const logs = fs.readFileSync(logPath, 'utf8');
-        res.header('Content-Type', 'text/plain').send(logs);
-    } else {
-        res.send('No debug log file found.');
-    }
-} catch (e) {
-    res.status(500).send('Error reading logs: ' + e.message);
-}
-});
 
 // Rate limiting
 const limiter = rateLimit({
