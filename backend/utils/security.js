@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
 
-const SALT_ROUNDS = 12;
+const SALT_ROUNDS = 10;
 
 /**
  * Hash a password using bcrypt
