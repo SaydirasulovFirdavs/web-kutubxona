@@ -95,9 +95,16 @@ app.get('/api/health', (req, res) => res.json({ status: 'UP', timestamp: new Dat
 app.get('/debug-logs', (req, res) => {
     try {
         const logPath = path.join(__dirname, 'debug_log.txt');
+
+        // Clear logs if requested
+        if (req.query.clear === 'true') {
+            fs.writeFileSync(logPath, `--- LOGS CLEARED AT ${new Date().toISOString()} ---\n`);
+            return res.send('Logs cleared.');
+        }
+
         if (fs.existsSync(logPath)) {
             const logs = fs.readFileSync(logPath, 'utf8').split('\n');
-            const lastLines = logs.slice(-100).join('\n');
+            const lastLines = logs.slice(-500).join('\n');
             res.header('Content-Type', 'text/plain').send(lastLines);
         } else {
             res.send('No debug log file found at: ' + logPath);
