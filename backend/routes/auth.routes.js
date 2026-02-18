@@ -11,6 +11,11 @@ import {
 
 const router = express.Router();
 
+router.use((req, res, next) => {
+    console.log(`🔍 DEBUG: Entering Auth Router: ${req.method} ${req.url}`);
+    next();
+});
+
 /**
  * @route   POST /api/auth/register
  * @desc    Register new user

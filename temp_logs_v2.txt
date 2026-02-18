@@ -1,0 +1,64 @@
+[2025-12-19T14:00:05.211Z] Upload Error: неверный синтаксис для типа integer: ""
+Stack: error: неверный синтаксис для типа integer: ""
+    at C:\Users\saydi\OneDrive\Desktop\Web kutubxona\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async uploadBook (file:///C:/Users/saydi/OneDrive/Desktop/Web%20kutubxona/backend/controllers/admin.controller.js:54:28)
+[2025-12-19T14:06:34.973Z] Upload Error: неверный синтаксис для типа integer: ""
+Stack: error: неверный синтаксис для типа integer: ""
+    at C:\Users\saydi\OneDrive\Desktop\Web kutubxona\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async uploadBook (file:///C:/Users/saydi/OneDrive/Desktop/Web%20kutubxona/backend/controllers/admin.controller.js:54:28)
+[2025-12-19T14:15:52.405Z] Global Error: Muqova faqat rasm bo'lishi kerak!
+Stack: Error: Muqova faqat rasm bo'lishi kerak!
+    at fileFilter (file:///C:/Users/saydi/OneDrive/Desktop/Web%20kutubxona/backend/routes/admin.routes.js:41:16)
+    at wrappedFileFilter (C:\Users\saydi\OneDrive\Desktop\Web kutubxona\backend\node_modules\multer\index.js:44:7)
+    at Multipart.<anonymous> (C:\Users\saydi\OneDrive\Desktop\Web kutubxona\backend\node_modules\multer\lib\make-middleware.js:109:7)
+    at Multipart.emit (node:events:508:28)
+    at HeaderParser.cb (C:\Users\saydi\OneDrive\Desktop\Web kutubxona\backend\node_modules\busboy\lib\types\multipart.js:358:14)
+    at HeaderParser.push (C:\Users\saydi\OneDrive\Desktop\Web kutubxona\backend\node_modules\busboy\lib\types\multipart.js:162:20)
+    at SBMH.ssCb [as _cb] (C:\Users\saydi\OneDrive\Desktop\Web kutubxona\backend\node_modules\busboy\lib\types\multipart.js:394:37)
+    at feed (C:\Users\saydi\OneDrive\Desktop\Web kutubxona\backend\node_modules\streamsearch\lib\sbmh.js:219:14)
+    at SBMH.push (C:\Users\saydi\OneDrive\Desktop\Web kutubxona\backend\node_modules\streamsearch\lib\sbmh.js:104:16)
+    at Multipart._write (C:\Users\saydi\OneDrive\Desktop\Web kutubxona\backend\node_modules\busboy\lib\types\multipart.js:567:19)
+[2025-12-19T14:20:58.437Z] Global Error: Muqova faqat rasm bo'lishi kerak!
+Stack: Error: Muqova faqat rasm bo'lishi kerak!
+    at fileFilter (file:///C:/Users/saydi/OneDrive/Desktop/Web%20kutubxona/backend/routes/admin.routes.js:41:16)
+    at wrappedFileFilter (C:\Users\saydi\OneDrive\Desktop\Web kutubxona\backend\node_modules\multer\index.js:44:7)
+    at Multipart.<anonymous> (C:\Users\saydi\OneDrive\Desktop\Web kutubxona\backend\node_modules\multer\lib\make-middleware.js:109:7)
+    at Multipart.emit (node:events:508:28)
+    at HeaderParser.cb (C:\Users\saydi\OneDrive\Desktop\Web kutubxona\backend\node_modules\busboy\lib\types\multipart.js:358:14)
+    at HeaderParser.push (C:\Users\saydi\OneDrive\Desktop\Web kutubxona\backend\node_modules\busboy\lib\types\multipart.js:162:20)
+    at SBMH.ssCb [as _cb] (C:\Users\saydi\OneDrive\Desktop\Web kutubxona\backend\node_modules\busboy\lib\types\multipart.js:394:37)
+    at feed (C:\Users\saydi\OneDrive\Desktop\Web kutubxona\backend\node_modules\streamsearch\lib\sbmh.js:219:14)
+    at SBMH.push (C:\Users\saydi\OneDrive\Desktop\Web kutubxona\backend\node_modules\streamsearch\lib\sbmh.js:104:16)
+    at Multipart._write (C:\Users\saydi\OneDrive\Desktop\Web kutubxona\backend\node_modules\busboy\lib\types\multipart.js:567:19)
+[2025-12-20T14:11:49.342Z] Global Error: Expected property name or '}' in JSON at position 1 (line 1 column 2)
+Stack: SyntaxError: Expected property name or '}' in JSON at position 1 (line 1 column 2)
+    at JSON.parse (<anonymous>)
+    at parse (C:\Users\saydi\OneDrive\Desktop\Web kutubxona\backend\node_modules\body-parser\lib\types\json.js:92:19)
+    at C:\Users\saydi\OneDrive\Desktop\Web kutubxona\backend\node_modules\body-parser\lib\read.js:128:18
+    at AsyncResource.runInAsyncScope (node:async_hooks:214:14)
+    at invokeCallback (C:\Users\saydi\OneDrive\Desktop\Web kutubxona\backend\node_modules\raw-body\index.js:238:16)
+    at done (C:\Users\saydi\OneDrive\Desktop\Web kutubxona\backend\node_modules\raw-body\index.js:227:7)
+    at IncomingMessage.onEnd (C:\Users\saydi\OneDrive\Desktop\Web kutubxona\backend\node_modules\raw-body\index.js:287:7)
+    at IncomingMessage.emit (node:events:508:28)
+    at endReadableNT (node:internal/streams/readable:1701:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+[2025-12-20T14:12:09.120Z] Global Error: Expected property name or '}' in JSON at position 1 (line 1 column 2)
+Stack: SyntaxError: Expected property name or '}' in JSON at position 1 (line 1 column 2)
+    at JSON.parse (<anonymous>)
+    at parse (C:\Users\saydi\OneDrive\Desktop\Web kutubxona\backend\node_modules\body-parser\lib\types\json.js:92:19)
+    at C:\Users\saydi\OneDrive\Desktop\Web kutubxona\backend\node_modules\body-parser\lib\read.js:128:18
+    at AsyncResource.runInAsyncScope (node:async_hooks:214:14)
+    at invokeCallback (C:\Users\saydi\OneDrive\Desktop\Web kutubxona\backend\node_modules\raw-body\index.js:238:16)
+    at done (C:\Users\saydi\OneDrive\Desktop\Web kutubxona\backend\node_modules\raw-body\index.js:227:7)
+    at IncomingMessage.onEnd (C:\Users\saydi\OneDrive\Desktop\Web kutubxona\backend\node_modules\raw-body\index.js:287:7)
+    at IncomingMessage.emit (node:events:508:28)
+    at endReadableNT (node:internal/streams/readable:1701:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+[2026-02-18T10:46:57.787Z] GET /debug-logs - PROXIES: 82.215.102.167 - IP: 82.215.102.167
+[2026-02-18T10:47:28.924Z] GET /debug-logs - PROXIES: 82.215.102.167 - IP: 82.215.102.167
+[2026-02-18T10:48:05.051Z] GET /debug-logs - PROXIES: 82.215.102.167 - IP: 82.215.102.167
+[2026-02-18T10:49:15.070Z] POST /api/test-log - PROXIES: 82.215.102.167 - IP: 82.215.102.167
+[2026-02-18T10:49:52.636Z] GET /debug-logs - PROXIES: 82.215.102.167 - IP: 82.215.102.167
+[2026-02-18T10:50:16.335Z] GET /debug-logs - PROXIES: 82.215.102.167 - IP: 82.215.102.167
