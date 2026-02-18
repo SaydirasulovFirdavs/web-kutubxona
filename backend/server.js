@@ -49,7 +49,11 @@ const PORT = process.env.PORT || 5000;
 
 // Simple request logger
 app.use((req, res, next) => {
-    console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+    const logBatch = `[${new Date().toISOString()}] ${req.method} ${req.url} - PROXIES: ${req.ips.join(',')} - IP: ${req.ip}\n`;
+    console.log(logBatch);
+    try {
+        fs.appendFileSync(path.join(__dirname, 'debug_log.txt'), logBatch);
+    } catch (e) { }
     next();
 });
 
@@ -84,22 +88,34 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use('/uploads', express.static(uploadDir));
 
 // Health Checks (Unprotected)
-app.get('/health', (req, res) => res.json({ status: 'UP', timestamp: new Date().toISOString() }));
+app.get('/health', (req, res) => res.json({ status: 'UP', timestamp: new Date().toISOString(), env: process.env.NODE_ENV }));
 app.get('/api/health', (req, res) => res.json({ status: 'UP', timestamp: new Date().toISOString() }));
 
-// Debug Log Endpoint (Temporary for Railway Troubleshooting)
-app.get('/api/debug/server-logs', (req, res) => {
+// Debug Log Endpoint (Root Level to bypass /api handlers)
+app.get('/debug-logs', (req, res) => {
     try {
         const logPath = path.join(__dirname, 'debug_log.txt');
         if (fs.existsSync(logPath)) {
             const logs = fs.readFileSync(logPath, 'utf8');
             res.header('Content-Type', 'text/plain').send(logs);
         } else {
-            res.send('No debug log file found.');
+            res.send('No debug log file found at: ' + logPath);
         }
     } catch (e) {
         res.status(500).send('Error reading logs: ' + e.message);
     }
+});
+try {
+    const logPath = path.join(__dirname, 'debug_log.txt');
+    if (fs.existsSync(logPath)) {
+        const logs = fs.readFileSync(logPath, 'utf8');
+        res.header('Content-Type', 'text/plain').send(logs);
+    } else {
+        res.send('No debug log file found.');
+    }
+} catch (e) {
+    res.status(500).send('Error reading logs: ' + e.message);
+}
 });
 
 // Rate limiting
