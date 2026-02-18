@@ -7,7 +7,7 @@ dotenv.config();
 const { Pool } = pg;
 
 // Flag to force mock DB - Set to false for production
-const USE_MOCK_DB = false;
+const USE_MOCK_DB = true;
 let isMock = USE_MOCK_DB;
 
 let pool;

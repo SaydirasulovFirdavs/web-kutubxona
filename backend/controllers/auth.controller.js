@@ -152,7 +152,6 @@ export const login = async (req, res) => {
         console.log('🔍 DEBUG: Login started');
         client = await getClient();
         console.log('🔍 DEBUG: DB Client acquired');
-        return res.json({ success: true, message: 'DEBUG: DB CONNECTED OK' });
 
         const { email, password } = req.body;
 
