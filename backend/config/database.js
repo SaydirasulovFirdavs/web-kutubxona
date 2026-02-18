@@ -11,6 +11,10 @@ const USE_MOCK_DB = false;
 let isMock = USE_MOCK_DB;
 let pool;
 
+const logToFile = (msg) => {
+    console.log(`[DB] ${msg}`);
+};
+
 if (!USE_MOCK_DB) {
     logToFile('🔍 DB: Initializing pool...');
     const config = process.env.DATABASE_URL

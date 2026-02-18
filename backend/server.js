@@ -85,7 +85,20 @@ app.get('/health', (req, res) => res.json({ status: 'UP', timestamp: new Date().
 app.get('/api/health', (req, res) => res.json({ status: 'UP', timestamp: new Date().toISOString() }));
 
 // Debug Log Endpoint (Root Level to bypass /api handlers)
-// Removed for cleanliness
+app.get('/debug-logs', (req, res) => {
+    try {
+        const logPath = path.join(__dirname, 'debug_log.txt');
+        if (fs.existsSync(logPath)) {
+            const logs = fs.readFileSync(logPath, 'utf8').split('\n');
+            const lastLines = logs.slice(-500).join('\n');
+            res.header('Content-Type', 'text/plain').send(lastLines);
+        } else {
+            res.send('No debug log file found at: ' + logPath);
+        }
+    } catch (e) {
+        res.status(500).send('Error reading logs: ' + e.message);
+    }
+});
 
 // Rate limiting
 const limiter = rateLimit({
