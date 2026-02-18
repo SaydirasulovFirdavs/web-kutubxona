@@ -1,23 +1,18 @@
 import pg from 'pg';
 import dotenv from 'dotenv';
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
 import { mockData } from './mockData.js';
 
 dotenv.config();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 const { Pool } = pg;
 
 // Flag to force mock DB
-const USE_MOCK_DB = true; // TEMPORARY FOR DIAGNOSTICS
+const USE_MOCK_DB = true; // TEMPORARY FOR STABILITY
+let isMock = USE_MOCK_DB;
+let pool;
 
 const logToFile = (msg) => {
-    const timestamp = new Date().toISOString();
-    console.log(`[${timestamp}] ${msg}`);
+    console.log(`[DB-LOG] ${msg}`);
 };
 
 if (!USE_MOCK_DB) {
