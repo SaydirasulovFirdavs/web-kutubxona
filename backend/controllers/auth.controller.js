@@ -160,6 +160,8 @@ export const login = async (req, res) => {
         }
 
         // Get user with role
+        console.log(`🔍 DEBUG: Starting DB query for user: ${email}`);
+        const dbStartTime = Date.now();
         const result = await query(
             `SELECT u.id, u.email, u.password_hash, u.full_name, u.status, 
                     u.email_verified, r.name as role
@@ -168,6 +170,8 @@ export const login = async (req, res) => {
              WHERE u.email = $1`,
             [email.toLowerCase()]
         );
+        const dbDuration = Date.now() - dbStartTime;
+        console.log(`🔍 DEBUG: DB query finished in ${dbDuration}ms for user: ${email}`);
 
         if (result.rows.length === 0) {
             console.log(`🔍 Login attempt failed: User not found [${email}]`);
