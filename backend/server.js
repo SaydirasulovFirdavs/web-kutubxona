@@ -108,6 +108,21 @@ app.use('/api/user', userRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/stats', statsRoutes);
 
+// Debug Log Endpoint (Temporary for Railway Troubleshooting)
+app.get('/api/debug/server-logs', (req, res) => {
+    try {
+        const logPath = path.join(__dirname, 'debug_log.txt');
+        if (fs.existsSync(logPath)) {
+            const logs = fs.readFileSync(logPath, 'utf8');
+            res.header('Content-Type', 'text/plain').send(logs);
+        } else {
+            res.send('No debug log file found.');
+        }
+    } catch (e) {
+        res.status(500).send('Error reading logs: ' + e.message);
+    }
+});
+
 // ============================================
 // FRONTEND SERVING (Production)
 // ============================================
@@ -143,6 +158,8 @@ app.use((err, req, res, next) => {
     res.status(err.status || 500).json({
         success: false,
         message: err.message || 'Server xatosi',
+        // Temporarily enable stack/detail in production to catch the "failed to respond" cause
+        debug_info: err.stack,
         ...(process.env.NODE_ENV === 'development' && { stack: err.stack })
     });
 });
